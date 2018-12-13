@@ -2,49 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af301a54-dbf4-4c6c-888c-10463e4c95e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_9_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_11_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_2_23_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_1_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_1_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OMDBException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OmdbApi.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/DataType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/PlotType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/ResultType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/AbstractJsonMapping.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/OmdbVideoBasic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/OmdbVideoFull.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/SearchResults.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbParameters.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbUrlBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/Param.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/resources/bin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_back/src/main/resources/version.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/specialmovieknight.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/specialmovieknight.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_back/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_back/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/movieknight_back/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,18 +44,20 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="JAVA" value="1" />
+          <entry key="IDEA_MODULE" value="1" />
+          <entry key="JAVA" value="28" />
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="6" />
+          <entry key="JavaScript" value="7" />
           <entry key="Properties" value="1" />
           <entry key="TypeScript" value="1" />
-          <entry key="XML" value="1" />
+          <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="146" />
-          <entry key="JavaScript" value="2715" />
+          <entry key="JAVA" value="111" />
+          <entry key="JavaScript" value="2716" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -92,81 +70,102 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.css">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/ResultType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
+            <state relative-caret-position="17">
+              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/OmdbVideoFull.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="-1620">
+              <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#5542#5604#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/index.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/SearchResults.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+            <state relative-caret-position="85">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/node_modules/@types/react/index.d.ts">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6562">
-              <caret line="409" column="8" selection-start-line="409" selection-start-column="8" selection-end-line="409" selection-end-column="8" />
+            <state relative-caret-position="34">
+              <caret line="20" selection-start-line="20" selection-end-line="22" selection-end-column="67" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbParameters.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="21" selection-start-line="21" selection-end-line="23" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbUrlBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/API-OMDB.iml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+            <state relative-caret-position="219">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OmdbApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_back/pom.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OMDBException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -191,8 +190,14 @@
         <option value="$PROJECT_DIR$/movieknight_front/src/components/homeMainComponenet.js" />
         <option value="$PROJECT_DIR$/movieknight_front/src/index.js" />
         <option value="$PROJECT_DIR$/movieknight_front/src/App.js" />
-        <option value="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" />
         <option value="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/OmdbVideoFull.java" />
+        <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OmdbApi.java" />
+        <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbBuilder.java" />
+        <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbParameters.java" />
+        <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbUrlBuilder.java" />
+        <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/Main.java" />
       </list>
     </option>
   </component>
@@ -224,8 +229,8 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
-    <option name="width" value="1615" />
-    <option name="height" value="880" />
+    <option name="width" value="1699" />
+    <option name="height" value="1029" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -278,20 +283,12 @@
             <path>
               <item name="specialmovieknight" type="b2602c69:ProjectViewProjectNode" />
               <item name="specialmovieknight" type="462c0819:PsiDirectoryNode" />
-              <item name="movieknight_front" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="specialmovieknight" type="b2602c69:ProjectViewProjectNode" />
-              <item name="specialmovieknight" type="462c0819:PsiDirectoryNode" />
-              <item name="movieknight_front" type="462c0819:PsiDirectoryNode" />
+              <item name="movieknight_back" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="specialmovieknight" type="b2602c69:ProjectViewProjectNode" />
-              <item name="specialmovieknight" type="462c0819:PsiDirectoryNode" />
-              <item name="movieknight_front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="movieknight" type="462c0819:PsiDirectoryNode" />
+              <item name="OmdbAPI" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -301,24 +298,34 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544717869031" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544721500073" />
+    <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/org/yamj/api-common/2.1" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Problems" />
-    <property name="project.structure.proportion" value="0.14765625" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15024233" />
+    <property name="project.structure.side.proportion" value="0.46100917" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2018.2.7\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_back" />
+      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_back\src\main\resources" />
+      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_back\src\main\java\com\movieknight\movieknight\OmdbAPI" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -332,7 +339,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.Unnamed">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.movieknight.movieknight.OmdbAPI.Main" />
+      <module name="movieknight" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.movieknight.movieknight.OmdbAPI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="node" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -354,7 +374,13 @@
     <list>
       <item itemvalue="Node.js.Unnamed" />
       <item itemvalue="Spring Boot.MovieknightApplication" />
+      <item itemvalue="Application.Main" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -370,27 +396,28 @@
       <workItem from="1544624433966" duration="270000" />
       <workItem from="1544624857653" duration="3028000" />
       <workItem from="1544692127189" duration="9539000" />
-      <workItem from="1544706988723" duration="1906000" />
+      <workItem from="1544706988723" duration="5322000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18814000" />
+    <option name="totallyTimeSpent" value="22230000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.26308724" />
+      <window_info id="Web" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.26308724" />
       <window_info id="Structure" order="1" sideWeight="0.50141644" side_tool="true" weight="0.25637585" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -402,6 +429,7 @@
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3286119" />
       <window_info anchor="bottom" id="TypeScript" order="13" />
+      <window_info anchor="right" id="Bean Validation" weight="0.3295302" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24966443" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -468,7 +496,7 @@
     <entry file="file://$PROJECT_DIR$/movieknight_front/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -479,20 +507,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.js">
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state>
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -501,10 +518,154 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="162">
           <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/Database/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/Param.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/resources/bin.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/PlotType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/DataType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/AbstractJsonMapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/OmdbVideoBasic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/SearchResults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/API-OMDB.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/ResultType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/model/OmdbVideoFull.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1620">
+          <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5542#5604#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OMDBException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OmdbApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="20" selection-start-line="20" selection-end-line="22" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbParameters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="21" selection-start-line="21" selection-end-line="23" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/OmdbUrlBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -554,7 +715,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.46100917" />
               </list>
             </option>
           </splitter-proportions>
@@ -566,7 +727,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.46100917" />
                 <option value="0.6" />
               </list>
             </option>
@@ -587,11 +748,22 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: ch.qos.logback:logback-classic:1.2.3</last-edited>
+          <last-edited>2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.46100917" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.46100917" />
               </list>
             </option>
           </splitter-proportions>

@@ -1,11 +1,14 @@
 package com.movieknight.movieknight.Database;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity // This tells Hibernate to make a table out of this class
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class User {
 
 
@@ -15,6 +18,10 @@ public class User {
 
     private String name;
 
+
+    @Column(name = "email", nullable = false, unique = true)
+    @Email(message = "Please provide a valid e-mail")
+    @NotEmpty(message = "Please provide an e-mail")
     private String email;
 
 

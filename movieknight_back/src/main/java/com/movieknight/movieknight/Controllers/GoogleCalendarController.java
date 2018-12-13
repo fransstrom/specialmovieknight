@@ -17,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
@@ -78,6 +75,13 @@ public class GoogleCalendarController {
         return new RedirectView(authorize());
     }
 
+    @GetMapping(path = "/all")
+    public @ResponseBody
+    Iterable<User> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return userRepository.findAll();
+    }
+
     @RequestMapping(value = "/login/google", method = RequestMethod.GET, params = "code")
     public ResponseEntity<String> oauth2Callback(@RequestParam(value = "code") String code) {
         Events eventList;
@@ -92,8 +96,9 @@ public class GoogleCalendarController {
             message = eventList.getItems().toString();
             System.out.println("My:" + eventList.getItems());
 
-            for (int i = 0; eventList.getItems().size()>i;i++){
-            eventList.getItems().get(i).getCreator();
+            for (int i = 0; eventList.getItems().size() > i; i++) {
+
+                System.out.println(eventList.getItems().get(i).getCreator().getEmail());
             }
         } catch (Exception e) {
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
@@ -103,13 +108,20 @@ public class GoogleCalendarController {
         }
 
 
-        User n = new User();
-        n.setName("Frans");
-        n.setEmail("Frans.herrström@gmail.com");
-        userRepository.save(n);
         System.out.println("cal message:" + message);
 
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @RequestMapping("/database")
+    public void Database() {
+        User n = new User();
+        n.setName("Frans");
+        n.setEmail("frans.herrström@gmail.com");
+        if (userRepository.findByEmail(n.getEmail()) == null) {
+            userRepository.save(n);
+        }
+        System.out.println(userRepository.findByEmail("frans.herrström@gmail.com").getId() + "USER ID");
     }
 
     public Set<Event> getEvents() throws IOException {

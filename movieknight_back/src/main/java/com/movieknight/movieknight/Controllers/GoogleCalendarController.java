@@ -9,8 +9,11 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
+import com.movieknight.movieknight.Database.User;
+import com.movieknight.movieknight.Database.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +43,8 @@ import com.google.api.services.calendar.model.Event;
 @RestController
 public class GoogleCalendarController {
 
+    @Autowired
+    UserRepository userRepository;
 
     private final static Log logger = LogFactory.getLog(GoogleCalendarController.class);
     private static final String APPLICATION_NAME = "MovieNight";
@@ -91,7 +96,10 @@ public class GoogleCalendarController {
             message = "Exception while handling OAuth2 callback (" + e.getMessage() + ")."
                     + " Redirecting to google connection status page.";
         }
-
+        User n = new User();
+        n.setName("Frans");
+        n.setEmail("Frans.herrström@gmail.com");
+        userRepository.save(n);
         System.out.println("cal message:" + message);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

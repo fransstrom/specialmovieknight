@@ -69,7 +69,7 @@ public class GoogleCalendarController {
 
     private Set<Event> events = new HashSet<>();
 
-    private final DateTime date1=new DateTime(String.valueOf(LocalDateTime.now()));
+    private final DateTime date1 = new DateTime(String.valueOf(LocalDateTime.now()));
 
     private final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
 
@@ -110,17 +110,12 @@ public class GoogleCalendarController {
 
             insertUnavailableDatesToDB(items);
 
-
-
-
         } catch (Exception e) {
-
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
                     + " Redirecting to google connection status page.");
             message = "Exception while handling OAuth2 callback (" + e.getMessage() + ")."
                     + " Redirecting to google connection status page.";
         }
-
 
         System.out.println("cal message:" + message);
 
@@ -145,8 +140,6 @@ public class GoogleCalendarController {
 
                 }
                 insertBusyDateTimeToCommonCalendar(startDateTime, endDateTime);
-
-
             }
         }
     }
@@ -155,7 +148,7 @@ public class GoogleCalendarController {
         //insert dates into common calendar
         Event event = new Event()
                 .setSummary("Busy");
-        
+
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone("Europe/Stockholm");

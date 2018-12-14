@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(uniqueConstraints={@UniqueConstraint(columnNames={"date"})})
 public class UnavailableDate {
 
 

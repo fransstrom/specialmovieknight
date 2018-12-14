@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
-        maxWidth: 345,
+      //  maxWidth: 345,
     },
     media: {
         // ⚠️ object-fit is not supported by IE 11.
@@ -29,7 +29,7 @@ function ImgMediaCard(props) {
                     alt="Bild som skall visas"
                     className={classes.media}
                     height="140"
-                    image={item.URL}
+                    image={"https://m.media-amazon.com/images/M/MV5BMzkzMmU0YTYtOWM3My00YzBmLWI0YzctOGYyNTkwMWE5MTJkXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"}
                     title="Bild"
                 />
                 <CardContent>

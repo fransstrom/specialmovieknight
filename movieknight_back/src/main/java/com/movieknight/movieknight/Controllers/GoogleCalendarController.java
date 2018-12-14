@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Events;
-import com.movieknight.movieknight.Database.User;
-import com.movieknight.movieknight.Database.UserRepository;
+import com.movieknight.movieknight.Database.entities.UnavailableDate;
+import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
+import com.movieknight.movieknight.Database.entities.User1;
+import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,8 @@ public class GoogleCalendarController {
 
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    UnavalibleDateRepository unavalibleDateRepository;
     private final static Log logger = LogFactory.getLog(GoogleCalendarController.class);
     private static final String APPLICATION_NAME = "MovieNight";
     private static HttpTransport httpTransport;
@@ -77,7 +80,7 @@ public class GoogleCalendarController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Iterable<User> getAllUsers() {
+    Iterable<User1> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
@@ -96,10 +99,19 @@ public class GoogleCalendarController {
             message = eventList.getItems().toString();
             System.out.println("My:" + eventList.getItems());
 
-            for (int i = 0; eventList.getItems().size() > i; i++) {
+    /*        for (int i = 0; eventList.getItems().size() > i; i++){
+                System.out.println(eventList.getItems().get(i).getStart());
 
-                System.out.println(eventList.getItems().get(i).getCreator().getEmail());
-            }
+                UnavailableDate unavailableDates = new UnavailableDate();
+                Date date = new Date(String.valueOf(eventList.getItems().get(i).getStart().getDate()));
+                unavailableDates.setDate(date);
+                unavalibleDateRepository.save(unavailableDates);
+            }*/
+
+                for (int i = 0; eventList.getItems().size() > i; i++) {
+
+                    System.out.println(eventList.getItems().get(i).getCreator().getEmail());
+                }
         } catch (Exception e) {
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
                     + " Redirecting to google connection status page.");
@@ -113,15 +125,23 @@ public class GoogleCalendarController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+
     @RequestMapping("/database")
-    public void Database() {
-        User n = new User();
+    public Iterable<User1> Database() {
+
+        User1 n = new User1();
         n.setName("Frans");
-        n.setEmail("frans.herrström@gmail.com");
-        if (userRepository.findByEmail(n.getEmail()) == null) {
+        n.setEmail("frans.herrstrom@gmail.com");
+
             userRepository.save(n);
-        }
-        System.out.println(userRepository.findByEmail("frans.herrström@gmail.com").getId() + "USER ID");
+
+        return userRepository.findAll();
+    }
+
+    @RequestMapping("/dates")
+    public Iterable<UnavailableDate> Dates() {
+
+        return unavalibleDateRepository.findAll();
     }
 
     public Set<Event> getEvents() throws IOException {

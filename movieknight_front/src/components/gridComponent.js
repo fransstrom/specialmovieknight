@@ -36,7 +36,7 @@ function CenteredGrid(props) {
                     return(
                         <Grid item xs={3} key={index}>
                             <Paper className={classes.paper}>
-                                {index}
+                                
                                 <ImgMediaCard item={item} index={index}/>
                             </Paper>
                         </Grid>

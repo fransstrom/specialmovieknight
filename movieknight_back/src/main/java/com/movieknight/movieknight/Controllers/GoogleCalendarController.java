@@ -2,6 +2,7 @@ package com.movieknight.movieknight.Controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -67,7 +68,8 @@ public class GoogleCalendarController {
 
     private Set<Event> events = new HashSet<>();
 
-    final DateTime date1 = new DateTime("2018-12-14T16:30:00.000+05:30");
+    final DateTime date1=new DateTime(String.valueOf(LocalDateTime.now()));
+
     final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
 
     public void setEvents(Set<Event> events) {
@@ -148,23 +150,6 @@ public class GoogleCalendarController {
     }
 
 
-    @RequestMapping("/database")
-    public Iterable<User1> Database() {
-
-        User1 n = new User1();
-        n.setName("Frans");
-        n.setEmail("frans.herrstrom@gmail.com");
-
-        userRepository.save(n);
-
-        return userRepository.findAll();
-    }
-
-    @RequestMapping("/dates")
-    public Iterable<UnavailableDateTime> Dates() {
-
-        return unavalibleDateRepository.findAll();
-    }
 
     public Set<Event> getEvents() throws IOException {
         return this.events;

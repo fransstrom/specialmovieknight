@@ -1,15 +1,17 @@
 package com.movieknight.movieknight.Controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Events;
-import com.movieknight.movieknight.Database.entities.UnavailableDate;
+import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
 import com.movieknight.movieknight.Database.entities.User1;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
@@ -65,8 +67,8 @@ public class GoogleCalendarController {
 
     private Set<Event> events = new HashSet<>();
 
-    final DateTime date1 = new DateTime("2017-05-05T16:30:00.000+05:30");
-    final DateTime date2 = new DateTime("2019-05-05T16:30:00.000+05:30");
+    final DateTime date1 = new DateTime("2018-12-14T16:30:00.000+05:30");
+    final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
 
     public void setEvents(Set<Event> events) {
         this.events = events;
@@ -99,20 +101,16 @@ public class GoogleCalendarController {
             message = eventList.getItems().toString();
             System.out.println("My:" + eventList.getItems());
 
-    /*        for (int i = 0; eventList.getItems().size() > i; i++){
-                System.out.println(eventList.getItems().get(i).getStart());
+            List<Event> items = eventList.getItems();
 
-                UnavailableDate unavailableDates = new UnavailableDate();
-                Date date = new Date(String.valueOf(eventList.getItems().get(i).getStart().getDate()));
-                unavailableDates.setDate(date);
-                unavalibleDateRepository.save(unavailableDates);
-            }*/
+            insertUnavailableDatesToDB(items);
 
-                for (int i = 0; eventList.getItems().size() > i; i++) {
+     /*           for (int i = 0; eventList.getItems().size() > i; i++) {
 
                     System.out.println(eventList.getItems().get(i).getCreator().getEmail());
-                }
+                }*/
         } catch (Exception e) {
+
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
                     + " Redirecting to google connection status page.");
             message = "Exception while handling OAuth2 callback (" + e.getMessage() + ")."
@@ -125,6 +123,30 @@ public class GoogleCalendarController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    private void insertUnavailableDatesToDB(List<Event> items) {
+        for (Event item : items) {
+            if (item.getStart().getDateTime() != null) {
+                DateTime startDateTime = item.getStart().getDateTime();
+                DateTime endDateTime = item.getEnd().getDateTime();
+                UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
+
+                unavailableDateTime.setStartDateTime(startDateTime.toString());
+                System.out.println("title: " + item.getSummary());
+                System.out.println("Start: " + startDateTime);
+
+
+                System.out.println("End: " + endDateTime);
+                unavailableDateTime.setEndDateTime(endDateTime.toString());
+
+                try {
+                    unavalibleDateRepository.save(unavailableDateTime);
+                } catch (Exception ignored) {
+
+                }
+            }
+        }
+    }
+
 
     @RequestMapping("/database")
     public Iterable<User1> Database() {
@@ -133,13 +155,13 @@ public class GoogleCalendarController {
         n.setName("Frans");
         n.setEmail("frans.herrstrom@gmail.com");
 
-            userRepository.save(n);
+        userRepository.save(n);
 
         return userRepository.findAll();
     }
 
     @RequestMapping("/dates")
-    public Iterable<UnavailableDate> Dates() {
+    public Iterable<UnavailableDateTime> Dates() {
 
         return unavalibleDateRepository.findAll();
     }

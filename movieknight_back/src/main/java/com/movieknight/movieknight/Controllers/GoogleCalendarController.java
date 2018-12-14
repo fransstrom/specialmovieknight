@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
@@ -53,8 +54,8 @@ public class GoogleCalendarController {
     private static com.google.api.services.calendar.Calendar client;
 
     GoogleClientSecrets clientSecrets;
-    GoogleAuthorizationCodeFlow flow;
-    Credential credential;
+    private GoogleAuthorizationCodeFlow flow;
+    private Credential credential;
 
     @Value("${google.client.client-id}")
     private String clientId;
@@ -68,9 +69,9 @@ public class GoogleCalendarController {
 
     private Set<Event> events = new HashSet<>();
 
-    final DateTime date1=new DateTime(String.valueOf(LocalDateTime.now()));
+    private final DateTime date1=new DateTime(String.valueOf(LocalDateTime.now()));
 
-    final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
+    private final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
 
     public void setEvents(Set<Event> events) {
         this.events = events;
@@ -98,19 +99,20 @@ public class GoogleCalendarController {
             credential = flow.createAndStoreCredential(response, "userID");
             client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
                     .setApplicationName(APPLICATION_NAME).build();
+
             Calendar.Events events = client.events();
+
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
+
             message = eventList.getItems().toString();
-            System.out.println("My:" + eventList.getItems());
 
             List<Event> items = eventList.getItems();
 
             insertUnavailableDatesToDB(items);
 
-     /*           for (int i = 0; eventList.getItems().size() > i; i++) {
 
-                    System.out.println(eventList.getItems().get(i).getCreator().getEmail());
-                }*/
+
+
         } catch (Exception e) {
 
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
@@ -125,7 +127,7 @@ public class GoogleCalendarController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    private void insertUnavailableDatesToDB(List<Event> items) {
+    private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
         for (Event item : items) {
             if (item.getStart().getDateTime() != null) {
                 DateTime startDateTime = item.getStart().getDateTime();
@@ -135,20 +137,40 @@ public class GoogleCalendarController {
                 unavailableDateTime.setStartDateTime(startDateTime.toString());
                 System.out.println("title: " + item.getSummary());
                 System.out.println("Start: " + startDateTime);
-
-
                 System.out.println("End: " + endDateTime);
                 unavailableDateTime.setEndDateTime(endDateTime.toString());
-
                 try {
                     unavalibleDateRepository.save(unavailableDateTime);
                 } catch (Exception ignored) {
 
                 }
+                insertBusyDateTimeToCommonCalendar(startDateTime, endDateTime);
+
+
             }
         }
     }
 
+    private void insertBusyDateTimeToCommonCalendar(DateTime startDateTime, DateTime endDateTime) throws IOException {
+        //insert dates into common calendar
+        Event event = new Event()
+                .setSummary("Busy");
+        
+        EventDateTime start = new EventDateTime()
+                .setDateTime(startDateTime)
+                .setTimeZone("Europe/Stockholm");
+        event.setStart(start);
+
+
+        EventDateTime end = new EventDateTime()
+                .setDateTime(endDateTime)
+                .setTimeZone("Europe/Stockholm");
+        event.setEnd(end);
+        event.setColorId("3");
+        event = client.events().insert(commonCalendarId, event).execute();
+
+        System.out.printf("Event created: %s\n", event.getHtmlLink());
+    }
 
 
     public Set<Event> getEvents() throws IOException {

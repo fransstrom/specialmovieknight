@@ -3,10 +3,7 @@ package com.movieknight.movieknight.Controllers;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -134,35 +131,46 @@ public class GoogleCalendarController {
                 System.out.println("Start: " + startDateTime);
                 System.out.println("End: " + endDateTime);
                 unavailableDateTime.setEndDateTime(endDateTime.toString());
+                unavailableDateTime.setId(item.getId());
                 try {
                     unavalibleDateRepository.save(unavailableDateTime);
                 } catch (Exception ignored) {
 
                 }
-                insertBusyDateTimeToCommonCalendar(startDateTime, endDateTime);
             }
         }
+        insertBusyDateTimeToCommonCalendar();
     }
 
-    private void insertBusyDateTimeToCommonCalendar(DateTime startDateTime, DateTime endDateTime) throws IOException {
+    private void insertBusyDateTimeToCommonCalendar() throws IOException {
         //insert dates into common calendar
-        Event event = new Event()
-                .setSummary("Busy");
 
-        EventDateTime start = new EventDateTime()
-                .setDateTime(startDateTime)
-                .setTimeZone("Europe/Stockholm");
-        event.setStart(start);
+        Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
 
+        for (UnavailableDateTime date : unavalibleDates) {
+            try {
+                Event event = new Event()
+                        .setSummary("Busy");
 
-        EventDateTime end = new EventDateTime()
-                .setDateTime(endDateTime)
-                .setTimeZone("Europe/Stockholm");
-        event.setEnd(end);
-        event.setColorId("3");
-        event = client.events().insert(commonCalendarId, event).execute();
+                EventDateTime start = new EventDateTime()
+                        .setDateTime(DateTime.parseRfc3339(date.getStartDateTime()))
+                        .setTimeZone("Europe/Stockholm");
+                event.setStart(start);
 
-        System.out.printf("Event created: %s\n", event.getHtmlLink());
+                EventDateTime end = new EventDateTime()
+                        .setDateTime(DateTime.parseRfc3339(date.getEndDateTime()))
+                        .setTimeZone("Europe/Stockholm");
+                event.setEnd(end);
+                event.setColorId("3");
+                event.setId(date.getId());
+                event = client.events().insert(commonCalendarId, event).execute();
+
+                System.out.printf("Event created: %s\n", event.getHtmlLink());
+            } catch (Exception e) {
+
+            }
+        }
+
     }
 
 

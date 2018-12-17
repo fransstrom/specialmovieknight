@@ -4,13 +4,28 @@ import './App.css';
 import './components/gridComponent';
 import './components/cardComponent';
 import CenteredGrid from "./components/gridComponent";
+import axios from 'axios';
 
 class App extends Component {
+    constructor(props){
+        super();
+        this.state = {movieList: []}
+    }
+
+    loadData =(url) =>{
+        axios.get(url)
+            .then(res => {
+                const movieList = res.data;
+                this.setState({ movieList: movieList.Search});
+            })
+    }
+
 
   render() {
+        this.loadData("http://localhost:6969/omdb/movies/search/");
+
     return (
       <div className="App">
-
         <header className="App-header">
           {/*<img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -20,12 +35,13 @@ class App extends Component {
             Learn React
           </a>*/}
           Header
+            {this.props.movieSearch}
         </header>
           <nav className="App-nav">
               Navbar
           </nav>
           <div className="App-body">
-              <CenteredGrid/>
+              <CenteredGrid movieListFromAPI={this.state.movieList}/>
           </div>
           <footer className="App-footer">
               Footer

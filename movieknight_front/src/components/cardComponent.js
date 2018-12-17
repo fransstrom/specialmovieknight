@@ -29,15 +29,16 @@ function ImgMediaCard(props) {
                     alt="Bild som skall visas"
                     className={classes.media}
                     height="140"
-                    image={"https://m.media-amazon.com/images/M/MV5BMzkzMmU0YTYtOWM3My00YzBmLWI0YzctOGYyNTkwMWE5MTJkXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"}
+
+                    image={item.Poster}
                     title="Bild"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {item.title} Index:{index}
+                        {item.Title}
                     </Typography>
                     <Typography component="p">
-                        {item.plot}
+                        {item.Year}
                     </Typography>
                 </CardContent>
             </CardActionArea>

@@ -6,10 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import './cardComponent';
 import ImgMediaCard from "./cardComponent";
 
-let movie={title: "FILM 1", picture: "URL", rating: 5, plot: "bad"}
-let movie2={title: "Kevin 2", picture: "URL", rating: 5, plot: "bad"}
-let movie3={title: "Derp 3", picture: "URL", rating: 5, plot: "bad"}
-let movie4={title: "Nope 4", picture: "URL", rating: 5, plot: "bad"}
+let movie={title: "FILM 1", picture: "https://img.itch.zone/aW1nLzcyNzgyMy5wbmc=/original/D%2Fl6j%2B.png", rating: 5, plot: "bad"}
+let movie2={title: "Kevin 2", picture: "https://img.itch.zone/aW1nLzcyNzgyMy5wbmc=/original/D%2Fl6j%2B.png", rating: 5, plot: "bad"}
+let movie3={title: "Derp 3", picture: "https://img.itch.zone/aW1nLzcyNzgyMy5wbmc=/original/D%2Fl6j%2B.png", rating: 5, plot: "bad"}
+let movie4={title: "Nope 4", picture: "https://img.itch.zone/aW1nLzcyNzgyMy5wbmc=/original/D%2Fl6j%2B.png", rating: 5, plot: "bad"}
 
 export let movieList=[movie, movie2, movie3, movie4];
 
@@ -26,17 +26,16 @@ const styles = theme => ({
 
 
 function CenteredGrid(props) {
-    const { classes } = props;
-
+    const { classes, movieListFromAPI } = props;
+    console.log(movieListFromAPI)
     return (
 
         <div className={classes.root}>
             <Grid container spacing={24}>
-                {movieList.map((item, index) => {
+                {movieListFromAPI.map((item, index) => {
                     return(
                         <Grid item xs={3} key={index}>
                             <Paper className={classes.paper}>
-                                {index}
                                 <ImgMediaCard item={item} index={index}/>
                             </Paper>
                         </Grid>

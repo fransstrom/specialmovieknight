@@ -1,16 +1,19 @@
 package com.movieknight.movieknight.Controllers;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
-import com.movieknight.movieknight.Database.User;
-import com.movieknight.movieknight.Database.UserRepository;
+import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
+import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
+import com.movieknight.movieknight.Database.entities.User1;
+import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,8 @@ public class GoogleCalendarController {
 
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    UnavalibleDateRepository unavalibleDateRepository;
     private final static Log logger = LogFactory.getLog(GoogleCalendarController.class);
     private static final String APPLICATION_NAME = "MovieNight";
     private static HttpTransport httpTransport;
@@ -47,8 +51,8 @@ public class GoogleCalendarController {
     private static com.google.api.services.calendar.Calendar client;
 
     GoogleClientSecrets clientSecrets;
-    GoogleAuthorizationCodeFlow flow;
-    Credential credential;
+    private GoogleAuthorizationCodeFlow flow;
+    private Credential credential;
 
     @Value("${google.client.client-id}")
     private String clientId;
@@ -62,8 +66,9 @@ public class GoogleCalendarController {
 
     private Set<Event> events = new HashSet<>();
 
-    final DateTime date1 = new DateTime("2017-05-05T16:30:00.000+05:30");
-    final DateTime date2 = new DateTime("2019-05-05T16:30:00.000+05:30");
+    private final DateTime date1 = new DateTime(String.valueOf(LocalDateTime.now()));
+
+    private final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
 
     public void setEvents(Set<Event> events) {
         this.events = events;
@@ -77,7 +82,7 @@ public class GoogleCalendarController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Iterable<User> getAllUsers() {
+    Iterable<User1> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
@@ -91,15 +96,17 @@ public class GoogleCalendarController {
             credential = flow.createAndStoreCredential(response, "userID");
             client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
                     .setApplicationName(APPLICATION_NAME).build();
+
             Calendar.Events events = client.events();
+
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
+
             message = eventList.getItems().toString();
-            System.out.println("My:" + eventList.getItems());
 
-            for (int i = 0; eventList.getItems().size() > i; i++) {
+            List<Event> items = eventList.getItems();
 
-                System.out.println(eventList.getItems().get(i).getCreator().getEmail());
-            }
+            insertUnavailableDatesToDB(items);
+
         } catch (Exception e) {
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
                     + " Redirecting to google connection status page.");
@@ -107,22 +114,64 @@ public class GoogleCalendarController {
                     + " Redirecting to google connection status page.";
         }
 
-
         System.out.println("cal message:" + message);
 
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @RequestMapping("/database")
-    public void Database() {
-        User n = new User();
-        n.setName("Frans");
-        n.setEmail("frans.herrström@gmail.com");
-        if (userRepository.findByEmail(n.getEmail()) == null) {
-            userRepository.save(n);
+    private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
+        for (Event item : items) {
+            if (item.getStart().getDateTime() != null) {
+                DateTime startDateTime = item.getStart().getDateTime();
+                DateTime endDateTime = item.getEnd().getDateTime();
+                UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
+
+                unavailableDateTime.setStartDateTime(startDateTime.toString());
+                System.out.println("title: " + item.getSummary());
+                System.out.println("Start: " + startDateTime);
+                System.out.println("End: " + endDateTime);
+                unavailableDateTime.setEndDateTime(endDateTime.toString());
+                unavailableDateTime.setId(item.getId());
+                try {
+                    unavalibleDateRepository.save(unavailableDateTime);
+                } catch (Exception ignored) {
+
+                }
+            }
         }
-        System.out.println(userRepository.findByEmail("frans.herrström@gmail.com").getId() + "USER ID");
+        insertBusyDateTimeToCommonCalendar();
     }
+
+    private void insertBusyDateTimeToCommonCalendar() throws IOException {
+        //insert dates into common calendar
+
+        Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
+
+        for (UnavailableDateTime date : unavalibleDates) {
+            try {
+                Event event = new Event()
+                        .setSummary("Busy");
+
+                EventDateTime start = new EventDateTime()
+                        .setDateTime(DateTime.parseRfc3339(date.getStartDateTime()))
+                        .setTimeZone("Europe/Stockholm");
+                event.setStart(start);
+
+                EventDateTime end = new EventDateTime()
+                        .setDateTime(DateTime.parseRfc3339(date.getEndDateTime()))
+                        .setTimeZone("Europe/Stockholm");
+                event.setEnd(end);
+                event.setColorId("3");
+                event.setId(date.getId());
+                event = client.events().insert(commonCalendarId, event).execute();
+
+                System.out.printf("Event created: %s\n", event.getHtmlLink());
+            } catch (Exception e) {
+                System.err.println("From inser to common calendar: "+e.getMessage());
+            }
+        }
+    }
+
 
     public Set<Event> getEvents() throws IOException {
         return this.events;

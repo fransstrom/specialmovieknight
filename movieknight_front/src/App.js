@@ -18,27 +18,8 @@ class App extends Component {
                 const movieList = res.data;
                 this.setState({ movieList: movieList.Search});
             })
-
-        /*var that = this;
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                console.log(xhttp.responseText);
-                const movieList = xhttp.responseText;
-                that.setState({ movieList: movieList });
-            }
-        };
-        xhttp.open("GET", url, true);
-        xhttp.send();*/
     }
 
-    /*componentDidMount() {
-        axios.get(`http://localhost:6969/omdb/movies/search/`)
-            .then(res => {
-                const movieList = res.data;
-                this.setState({ movieList });
-            })
-    }*/
 
   render() {
         this.loadData("http://localhost:6969/omdb/movies/search/");

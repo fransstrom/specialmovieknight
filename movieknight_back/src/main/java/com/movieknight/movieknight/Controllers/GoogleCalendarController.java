@@ -167,10 +167,9 @@ public class GoogleCalendarController {
 
                 System.out.printf("Event created: %s\n", event.getHtmlLink());
             } catch (Exception e) {
-
+                System.err.println("From inser to common calendar: "+e.getMessage());
             }
         }
-
     }
 
 

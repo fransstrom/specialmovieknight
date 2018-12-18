@@ -88,8 +88,6 @@ const styles = theme => ({
 class PrimarySearchAppBar extends React.Component {
     state = {
         searchQuery: "default",
-        anchorEl: null,
-        mobileMoreAnchorEl: null,
         movieList: []
     };
 
@@ -98,13 +96,13 @@ class PrimarySearchAppBar extends React.Component {
     }
 
     handleKeyPress = (event) => {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             this.props.searchMovie(this.state.searchQuery);
         }
     }
 
     render() {
-        const { anchorEl, mobileMoreAnchorEl, searchQuery } = this.state;
+        const { searchQuery } = this.state;
         const { classes, searchMovie } = this.props;
 
         return (

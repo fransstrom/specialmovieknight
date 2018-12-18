@@ -19,16 +19,16 @@ const styles = theme => ({
 
 
 function CenteredGrid(props) {
-    const { classes, movieListFromAPI } = props;
+    const { classes, movieListFromAPI, movieInfoFromAPI, getMovieInfo } = props;
     return (
 
         <div className={classes.root}>
             <Grid container spacing={24}>
                 {movieListFromAPI.map((item, index) => {
                     return(
-                        <Grid item xs={3} key={index}>
+                        <Grid item xs={3} key={item.imdbID}>
                             <Paper className={classes.paper}>
-                                <ImgMediaCard item={item} index={index}/>
+                                <ImgMediaCard item={item} index={index} getMovieInfo={getMovieInfo} movieInfoFromAPI={movieInfoFromAPI}/>
                             </Paper>
                         </Grid>
                     )

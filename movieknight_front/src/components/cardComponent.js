@@ -26,7 +26,7 @@ function ImgMediaCard(props) {
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    alt="Bild som skall visas"
+                    alt="Picture not found"
                     className={classes.media}
                     height="140"
 
@@ -44,10 +44,10 @@ function ImgMediaCard(props) {
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">
-                    Share
+                    Details
                 </Button>
                 <Button size="small" color="primary">
-                    Book Movie
+                    Add to database
                 </Button>
             </CardActions>
         </Card>

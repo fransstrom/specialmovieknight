@@ -8,7 +8,7 @@
 }*/
 
 .App-header {
-  background-color: #282c34;
+  background-color: #5c6bc0;
   height: 15vh;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,6 @@
 }
 
 .App-nav {
-  background-color: red;
   height: 5vh;
   display: flex;
   flex-direction: column;
@@ -30,8 +29,7 @@
 }
 
 .App-body {
-  background-color: cadetblue;
-  margin-left: 10vw;
+  margin-left: 7vw;
   width: 80vw;
   display: flex;
   flex-direction: column;
@@ -39,8 +37,12 @@
 }
 
 .App-footer {
-  background-color: greenyellow;
+  background-color: #5c6bc0;
   height: 5vh;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

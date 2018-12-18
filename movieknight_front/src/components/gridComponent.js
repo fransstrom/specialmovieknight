@@ -20,7 +20,6 @@ const styles = theme => ({
 
 function CenteredGrid(props) {
     const { classes, movieListFromAPI } = props;
-    console.log(movieListFromAPI)
     return (
 
         <div className={classes.root}>

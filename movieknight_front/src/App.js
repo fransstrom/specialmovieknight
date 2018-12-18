@@ -3,10 +3,12 @@ import './App.css';
 import './components/gridComponent';
 import './components/cardComponent';
 import axios from 'axios';
-import CenteredGrid from "./components/gridComponent";
-import PrimarySearchAppBar from "./components/navbarComponent";
+import CenteredGrid from './components/gridComponent';
+import PrimarySearchAppBar from './components/navbarComponent';
+
 
 class App extends Component {
+
     constructor(props){
         super();
         this.state = {
@@ -58,6 +60,7 @@ class App extends Component {
             </div>
         );
     }
+
 }
 
 export default App;

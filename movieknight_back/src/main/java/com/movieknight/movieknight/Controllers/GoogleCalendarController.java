@@ -80,12 +80,7 @@ public class GoogleCalendarController {
         return new RedirectView(authorize());
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<User1> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return userRepository.findAll();
-    }
+
 
     @RequestMapping(value = "/login/google", method = RequestMethod.GET, params = "code")
     public ResponseEntity<String> oauth2Callback(@RequestParam(value = "code") String code) {

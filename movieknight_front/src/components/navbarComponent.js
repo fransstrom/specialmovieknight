@@ -7,6 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import GoogleAuth from './GoogleAuth';
 
 const styles = theme => ({
     root: {
@@ -19,7 +20,7 @@ const styles = theme => ({
         marginLeft: -12,
         marginRight: 20,
     },
-
+    
     button: {
         marginLeft: 0,
     },
@@ -130,6 +131,8 @@ class PrimarySearchAppBar extends React.Component {
                         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                             Search for movies
                         </Typography>
+                    <GoogleAuth></GoogleAuth>
+
                     </Toolbar>
                 </AppBar>
             </div>

@@ -3,16 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 import './components/gridComponent';
 import './components/cardComponent';
-import CenteredGrid from "./components/gridComponent";
 import axios from 'axios';
+import CenteredGrid from "./components/gridComponent";
+import PrimarySearchAppBar from "./components/navbarComponent";
 
 class App extends Component {
     constructor(props){
         super();
         this.state = {movieList: []}
     }
-
-    loadData =(url) =>{
+    
+    search = (query) => {
+        let url="http://localhost:6969/omdb/movies/search/?s="+query;
         axios.get(url)
             .then(res => {
                 const movieList = res.data;
@@ -22,7 +24,6 @@ class App extends Component {
 
 
   render() {
-        this.loadData("http://localhost:6969/omdb/movies/search/");
 
     return (
       <div className="App">
@@ -34,18 +35,18 @@ class App extends Component {
           <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
             Learn React
           </a>*/}
-          Header
+          Movie (Frickin) Night
             {this.props.movieSearch}
         </header>
           <nav className="App-nav">
-              Navbar
+              <PrimarySearchAppBar searchMovie={this.search.bind(this)}/>
           </nav>
           <div className="App-body">
               <CenteredGrid movieListFromAPI={this.state.movieList}/>
           </div>
-          <footer className="App-footer">
+          {/*<footer className="App-footer">
               Footer
-          </footer>
+          </footer>*/}
 
       </div>
     );

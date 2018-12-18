@@ -89,8 +89,6 @@ const styles = theme => ({
 class PrimarySearchAppBar extends React.Component {
     state = {
         searchQuery: "default",
-        anchorEl: null,
-        mobileMoreAnchorEl: null,
         movieList: []
     };
 
@@ -105,7 +103,7 @@ class PrimarySearchAppBar extends React.Component {
     }
 
     render() {
-        const { anchorEl, mobileMoreAnchorEl, searchQuery } = this.state;
+        const { searchQuery } = this.state;
         const { classes, searchMovie } = this.props;
 
         return (

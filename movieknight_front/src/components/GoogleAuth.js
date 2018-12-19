@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
+
 export default class GoogleAuth extends Component {
   state = {
-    isSignedIn: null
+    isSignedIn: null,
+    userName: null
   };
 
   componentDidMount() {
@@ -18,7 +19,8 @@ export default class GoogleAuth extends Component {
         .then(() => {
           const auth = window.gapi.auth2.getAuthInstance();
           this.setState({
-            isSignedIn: auth.isSignedIn.get()
+            isSignedIn: auth.isSignedIn.get(),
+            userName:auth.currentUser.Ab.w3.ig
           });
           auth.isSignedIn.listen(this.onAuthChange);
         });
@@ -39,7 +41,6 @@ export default class GoogleAuth extends Component {
         contentType: 'application/octet-stream; charset=utf-8',
         success: function(result) {
           // Handle or verify the server response.
-          console.log(result);
         },
         processData: false,
         data: authResult['code']
@@ -49,22 +50,10 @@ export default class GoogleAuth extends Component {
     }
   };
 
-  search = query => {
-    let url = 'http://localhost:6969/omdb/movies/search/?s=' + query;
-    axios.get(url).then(res => {
-      const movieList = res.data;
-      if (movieList.Search != null) {
-        this.setState({ movieList: movieList.Search });
-      } else {
-        this.setState({ movieList: [] });
-      }
-    });
-  };
-
   onAuthChange = () => {
     this.setState({
       isSignedIn: window.gapi.auth2.getAuthInstance().isSignedIn.get(),
-      userName:window.gapi.auth2.getAuthInstance().currentUser.Ab.w3.ig
+      userName: window.gapi.auth2.getAuthInstance().currentUser.Ab.w3.ig
     });
   };
 
@@ -72,11 +61,10 @@ export default class GoogleAuth extends Component {
     window.gapi.auth2
       .getAuthInstance()
       .grantOfflineAccess()
-      .then(this.signInCallback).then(()=>{
-        this.setState({isSignedIn:this.state.isSignedIn })
+      .then(this.signInCallback)
+      .then(() => {
+        this.setState({ isSignedIn: this.state.isSignedIn });
       });
-
-      
   };
 
   onSignOut = () => {

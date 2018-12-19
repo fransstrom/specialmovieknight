@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import './components/gridComponent';
-import './components/cardComponent';
+import './components/adminGridComponent';
+import './components/adminCardComponent';
 import axios from 'axios';
-import CenteredGrid from './components/gridComponent';
-import PrimarySearchAppBar from './components/navbarComponent';
+
+import CenteredGrid from "./components/adminGridComponent";
+import PrimarySearchAppBar from "./components/adminNavbarComponent";
+import ClientSearchAppBar from "./components/clientNavbarComponent";
 
 
 class App extends Component {
@@ -12,6 +14,7 @@ class App extends Component {
     constructor(props){
         super();
         this.state = {
+            adminState: true,
             movieList: [],
             movieInfo: {}
         }
@@ -30,35 +33,64 @@ class App extends Component {
             })
     }
 
-    getMovieInfo = (query) => {
+    getMovieInfo = (query) =>{
         let url="http://localhost:6969/omdb/movies/get/?s="+query;
         axios.get(url)
             .then(res => {
                 const movieInfo = res.data;
-                console.log(movieInfo)
+                this.setState({movieInfo: movieInfo});
+            });
+    }
+
+    async addToDataBase(query) {
+        let url = "http://localhost:6969/omdb/movies/get/?s=" + query;
+        await axios.get(url)
+            .then(res => {
+                const movieInfo = res.data;
                 this.setState({movieInfo: movieInfo});
             })
+        console.log("Added " + this.state.movieInfo.Title + " To DataBase");
     }
 
     render() {
-
-        return (
-            <div className="App">
-                <header className="App-header">
-                    Movie (Frickin) Night
-                    {this.props.movieSearch}
-                </header>
-                <nav className="App-nav">
-                    <PrimarySearchAppBar searchMovie={this.search.bind(this)}/>
-                </nav>
-                <div className="App-body">
-                    <CenteredGrid movieListFromAPI={this.state.movieList} movieInfoFromAPI={this.state.movieInfo} getMovieInfo={this.getMovieInfo.bind(this)}/>
+        if (this.state.adminState) {
+            return (
+                <div className="App">
+                    <button onClick={()=> {this.setState({adminState: false})}}>Click</button>
+                    <header className="App-header">
+                        MovieNight Admin Page
+                        {this.props.movieSearch}
+                    </header>
+                    <nav className="App-nav">
+                        <PrimarySearchAppBar searchMovie={this.search.bind(this)}/>
+                    </nav>
+                    <div className="App-body">
+                        <CenteredGrid movieListFromAPI={this.state.movieList} movieInfoFromAPI={this.state.movieInfo}
+                                      getMovieInfo={this.getMovieInfo.bind(this)}
+                                      addToDataBase={this.addToDataBase.bind(this)}/>
+                    </div>
                 </div>
-                {/*<footer className="App-footer">
-                Footer
-                </footer>*/}
-            </div>
-        );
+            );
+        }
+        else if (!this.state.adminState) {
+            return (
+                <div className="App">
+                    <button onClick={()=> {this.setState({adminState: true})}}>Click</button>
+                    <header className="App-header-client">
+                        MovieNight
+                        {this.props.movieSearch}
+                    </header>
+                    <nav className="App-nav">
+                        <ClientSearchAppBar searchMovie={this.search.bind(this)}/>
+                    </nav>
+                    <div className="App-body">
+                        <CenteredGrid movieListFromAPI={this.state.movieList} movieInfoFromAPI={this.state.movieInfo}
+                                      getMovieInfo={this.getMovieInfo.bind(this)}
+                                      addToDataBase={this.addToDataBase.bind(this)}/>
+                    </div>
+                </div>
+            );
+        }
     }
 
 }

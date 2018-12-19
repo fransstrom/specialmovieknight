@@ -20,7 +20,7 @@ export default class GoogleAuth extends Component {
           const auth = window.gapi.auth2.getAuthInstance();
           this.setState({
             isSignedIn: auth.isSignedIn.get(),
-            userName:auth.currentUser.Ab.w3.ig
+           userName: window.gapi.auth2.getAuthInstance().currentUser.Ab.w3.ig
           });
           auth.isSignedIn.listen(this.onAuthChange);
         });
@@ -62,9 +62,6 @@ export default class GoogleAuth extends Component {
       .getAuthInstance()
       .grantOfflineAccess()
       .then(this.signInCallback)
-      .then(() => {
-        this.setState({ isSignedIn: this.state.isSignedIn });
-      });
   };
 
   onSignOut = () => {

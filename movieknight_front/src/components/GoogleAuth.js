@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
 export default class GoogleAuth extends Component {
-
   state = {
-    isSignedIn: null
+    isSignedIn: null,
+    userName: null
   };
 
   componentDidMount() {
@@ -19,36 +19,74 @@ export default class GoogleAuth extends Component {
         .then(() => {
           const auth = window.gapi.auth2.getAuthInstance();
           this.setState({
-            isSignedIn: auth.isSignedIn.get()
+            isSignedIn: auth.isSignedIn.get(),
+            userName:auth.currentUser.Ab.w3.ig
           });
           auth.isSignedIn.listen(this.onAuthChange);
         });
     });
   }
 
-  onAuthChange=()=>{
-      this.setState({
-          isSignedIn:window.gapi.auth2.getAuthInstance().isSignedIn.get()
-      })
-  }
+  signInCallback = authResult => {
+    if (authResult['code']) {
+      // Send the code to the server
+      window.$.ajax({
+        type: 'POST',
+        url: 'http://localhost:6969/google',
+        // Always include an `X-Requested-With` header in every AJAX request,
+        // to protect against CSRF attacks.
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        contentType: 'application/octet-stream; charset=utf-8',
+        success: function(result) {
+          // Handle or verify the server response.
+        },
+        processData: false,
+        data: authResult['code']
+      });
+    } else {
+      // There was an error.
+    }
+  };
 
-onSignIn=()=>{
-    window.gapi.auth2.getAuthInstance().signIn();
-}
+  onAuthChange = () => {
+    this.setState({
+      isSignedIn: window.gapi.auth2.getAuthInstance().isSignedIn.get(),
+      userName: window.gapi.auth2.getAuthInstance().currentUser.Ab.w3.ig
+    });
+  };
 
-onSignOut=()=>{
+  onSignIn = () => {
+    window.gapi.auth2
+      .getAuthInstance()
+      .grantOfflineAccess()
+      .then(this.signInCallback)
+      .then(() => {
+        this.setState({ isSignedIn: this.state.isSignedIn });
+      });
+  };
+
+  onSignOut = () => {
     window.gapi.auth2.getAuthInstance().signOut();
-}
-
+  };
 
   renderAuthButoon = () => {
     if (this.state.isSignedIn === null) {
       return null;
     }
     if (this.state.isSignedIn) {
-      return <Button onClick={this.onSignOut} variant="contained" color="secondary"><i className="fab fa-google"></i>{" "}Sign out</Button>;
+      return (
+        <Button onClick={this.onSignOut} variant="contained" color="secondary">
+          <i className="fab fa-google" /> Sign out {this.state.userName}
+        </Button>
+      );
     } else {
-      return <Button onClick={this.onSignIn} variant="contained" color="secondary" ><i className="fab fa-google"></i> {" "}Sign in</Button>;
+      return (
+        <Button onClick={this.onSignIn} variant="contained" color="secondary">
+          <i className="fab fa-google" /> Sign in
+        </Button>
+      );
     }
   };
 

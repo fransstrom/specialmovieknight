@@ -52,6 +52,11 @@ public class GoogleAuthController {
                         .execute();
 
         String accessToken = tokenResponse.getAccessToken();
+        System.out.println("accessToken: " + accessToken);
+        String refreshToken = tokenResponse.getRefreshToken();
+        Long expiresAt = System.currentTimeMillis() + (tokenResponse.getExpiresInSeconds() * 1000);
+        System.out.println("refreshToken: " + refreshToken);
+        System.out.println("expiresAt: " + expiresAt);
 
 // Use access token to call API
 /*        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);

@@ -7,17 +7,11 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import './css/navbar.css';
 
 const styles = theme => ({
     root: {
         width: '100%',
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
     },
 
     button: {
@@ -39,11 +33,10 @@ const styles = theme => ({
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
-        marginRight: theme.spacing.unit * 2,
-        marginLeft: 0,
+        marginRight: theme.spacing.unit * 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing.unit * 3,
+            marginLeft: theme.spacing.unit * 0,
             width: 'auto',
         },
     },
@@ -69,18 +62,6 @@ const styles = theme => ({
         width: '100%',
         [theme.breakpoints.up('md')]: {
             width: 200,
-        },
-    },
-    sectionDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-        },
-    },
-    sectionMobile: {
-        display: 'flex',
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
         },
     },
 });
@@ -109,9 +90,10 @@ class PrimarySearchAppBar extends React.Component {
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+                        {/*<Typography className={classes.title} variant="h6" color="inherit" noWrap>
                             Admin
-                        </Typography>
+                        </Typography>*/}
+                        <span className={"searchBar"}>
                         <div className={classes.search}>
                             <div className={classes.searchIcon}></div>
                             <InputBase
@@ -124,6 +106,7 @@ class PrimarySearchAppBar extends React.Component {
                                 }}
                             />
                         </div>
+                        </span>
                         <Button onClick={()=> {searchMovie(searchQuery)}} variant="contained" color="primary" className={classes.button}>
                             GO
                         </Button>

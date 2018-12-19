@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import './cardComponent';
-import ImgMediaCard from "./cardComponent";
+import './adminCardComponent';
+import ImgMediaCard from "./adminCardComponent";
 
 const styles = theme => ({
     root: {
@@ -19,7 +19,7 @@ const styles = theme => ({
 
 
 function CenteredGrid(props) {
-    const { classes, movieListFromAPI, movieInfoFromAPI, getMovieInfo } = props;
+    const { classes, movieListFromAPI, movieInfoFromAPI, getMovieInfo, addToDataBase } = props;
     return (
 
         <div className={classes.root}>
@@ -28,7 +28,7 @@ function CenteredGrid(props) {
                     return(
                         <Grid item xs={3} key={item.imdbID}>
                             <Paper className={classes.paper}>
-                                <ImgMediaCard item={item} index={index} getMovieInfo={getMovieInfo} movieInfoFromAPI={movieInfoFromAPI}/>
+                                <ImgMediaCard item={item} index={index} getMovieInfo={getMovieInfo} movieInfoFromAPI={movieInfoFromAPI} addToDataBase={addToDataBase}/>
                             </Paper>
                         </Grid>
                     )

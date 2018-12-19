@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/movieknight_back/movieknight.iml" filepath="$PROJECT_DIR$/movieknight_back/movieknight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movieknight_back/movieknight.iml" filepath="$PROJECT_DIR$/movieknight_back/movieknight.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/specialmovieknight.iml" filepath="$PROJECT_DIR$/.idea/specialmovieknight.iml" />
     </modules>
   </component>

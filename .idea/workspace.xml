@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af301a54-dbf4-4c6c-888c-10463e4c95e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/css/modal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/modalComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/clientNavbarComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/css/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/specialmovieknight.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/specialmovieknight.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/Controllers/OmdbController.java" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/Controllers/OmdbController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_front/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movieknight_front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/navbarComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/navbarComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/adminCardComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/adminGridComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/modalComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/adminModalComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieknight_front/src/components/navbarComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/movieknight_front/src/components/adminNavbarComponent.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/movieknight_back/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,14 +98,37 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-434723408">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSS" value="41" />
+          <entry key="JavaScript" value="1741" />
+          <entry key="PLAIN_TEXT" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="3" />
+          <entry key="JAVA" value="1" />
+          <entry key="JavaScript" value="3" />
+          <entry key="Scratch" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="60" column="90" selection-start-line="60" selection-start-column="74" selection-end-line="60" selection-end-column="90" />
+            <state relative-caret-position="-121">
+              <caret line="67" column="26" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -110,10 +137,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/navbarComponent.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminNavbarComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="98" column="24" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+            <state relative-caret-position="306">
+              <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -121,14 +148,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/modalComponent.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/clientNavbarComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="154">
+              <caret line="107" column="29" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/css/navbar.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -137,7 +170,7 @@
         <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/css/modal.css">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+              <caret column="6" selection-start-column="6" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -145,17 +178,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+            <state relative-caret-position="134">
+              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminModalComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="30" column="85" selection-start-line="30" selection-start-column="85" selection-end-line="30" selection-end-column="85" />
+            <state relative-caret-position="425">
+              <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -164,10 +197,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js">
+        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OMDBException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="23" column="68" lean-forward="true" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+            <state relative-caret-position="68">
+              <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminGridComponent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="517">
+              <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -176,27 +218,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_back/pom.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/Controllers/OmdbController.java">
+        <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminCardComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+            <state relative-caret-position="799">
+              <caret line="47" column="65" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot/2.1.1.RELEASE/spring-boot-2.1.1.RELEASE.jar!/org/springframework/boot/SpringApplication.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11832">
-              <caret line="776" column="20" selection-start-line="776" selection-start-column="20" selection-end-line="776" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -219,6 +247,7 @@
       <find>mail</find>
       <find>grow</find>
       <find>handle</find>
+      <find>menuButton</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -242,14 +271,18 @@
         <option value="$PROJECT_DIR$/movieknight_front/src/serviceWorker.js" />
         <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/Cors/CorsFilter.java" />
         <option value="$PROJECT_DIR$/movieknight_front/src/components/PersonList.js" />
-        <option value="$PROJECT_DIR$/movieknight_front/src/App.css" />
         <option value="$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/Controllers/OmdbController.java" />
-        <option value="$PROJECT_DIR$/movieknight_front/src/App.js" />
         <option value="$PROJECT_DIR$/movieknight_front/src/components/css/modal.css" />
         <option value="$PROJECT_DIR$/movieknight_front/src/components/navbarComponent.js" />
-        <option value="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" />
-        <option value="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" />
         <option value="$PROJECT_DIR$/movieknight_front/src/components/modalComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/adminCardComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/css/navbar.css" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/adminNavbarComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/App.css" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/components/clientNavbarComponent.js" />
+        <option value="$PROJECT_DIR$/movieknight_front/src/App.js" />
       </list>
     </option>
   </component>
@@ -289,6 +322,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -334,16 +368,6 @@
             <path>
               <item name="specialmovieknight" type="b2602c69:ProjectViewProjectNode" />
               <item name="specialmovieknight" type="462c0819:PsiDirectoryNode" />
-              <item name="movieknight_back" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="movieknight" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="specialmovieknight" type="b2602c69:ProjectViewProjectNode" />
-              <item name="specialmovieknight" type="462c0819:PsiDirectoryNode" />
               <item name="movieknight_front" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -370,7 +394,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -385,8 +408,8 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545127963801" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545251450759" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../R&amp;B Kevin W/R&amp;N" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -398,16 +421,16 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2018.2.7\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_front" />
+      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_front\src" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\1.MovieKnight\specialmovieknight\movieknight_front\src\components" />
       <recent name="C:\Projects\1. MovieNight\specialmovieknight" />
       <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_front\src" />
       <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_back" />
       <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_back\src\main\resources" />
-      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_back\src\main\java\com\movieknight\movieknight\OmdbAPI" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_front" />
-      <recent name="C:\Projects\1. MovieNight\specialmovieknight\movieknight_front\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -483,17 +506,17 @@
       <workItem from="1545047784778" duration="15432000" />
       <workItem from="1545122473877" duration="287000" />
       <workItem from="1545123419556" duration="3718000" />
+      <workItem from="1545129453613" duration="13312000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49619000" />
+    <option name="totallyTimeSpent" value="62931000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.2751678" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.27919462" />
       <window_info id="Structure" order="1" sideWeight="0.50141644" side_tool="true" weight="0.25637585" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -539,15 +562,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/testComponent.js" />
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/homeMainComponenet.js" />
-    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/tools/Param.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/resources/bin.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -586,9 +600,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_back/API-OMDB.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/API-OMDB.iml" />
     <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/emumerations/ResultType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -600,13 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1620">
           <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OMDBException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -751,66 +756,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.css">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b90b23c8-2487-46cf-9574-93fb93d4d3e2/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_back/src/main/java/com/movieknight/movieknight/OmdbAPI/OMDBException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+        <state relative-caret-position="68">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminCardComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="65" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminModalComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminGridComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/css/modal.css">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/adminNavbarComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/clientNavbarComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="107" column="29" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/css/navbar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/movieknight_front/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="60" column="90" selection-start-line="60" selection-start-column="74" selection-end-line="60" selection-end-column="90" />
+        <state relative-caret-position="-121">
+          <caret line="67" column="26" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/navbarComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="98" column="24" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/cardComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="23" column="68" lean-forward="true" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/gridComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="30" column="85" selection-start-line="30" selection-start-column="85" selection-end-line="30" selection-end-column="85" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movieknight_front/src/components/modalComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

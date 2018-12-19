@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import SimpleModalWrapped from '../components/modalComponent';
+import SimpleModalWrapped from './adminModalComponent';
 
 const styles = {
     card: {
@@ -21,7 +21,7 @@ const styles = {
 };
 
 function ImgMediaCard(props) {
-    const { classes, item, getMovieInfo, movieInfoFromAPI } = props;
+    const { classes, item, getMovieInfo, movieInfoFromAPI, addToDataBase } = props;
     return (
         <Card className={classes.card}>
             <CardActionArea>
@@ -45,7 +45,7 @@ function ImgMediaCard(props) {
             </CardActionArea>
             <CardActions>
                 <SimpleModalWrapped getMovieInfo={getMovieInfo} item={item} movieInfoFromAPI={movieInfoFromAPI}/>
-                <Button size="small" color="primary">
+                <Button onClick={() => {addToDataBase(item.imdbID)}} size="small" color="primary">
                     Add to database
                 </Button>
             </CardActions>

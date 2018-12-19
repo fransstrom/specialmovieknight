@@ -63,7 +63,8 @@ export default class GoogleAuth extends Component {
 
   onAuthChange = () => {
     this.setState({
-      isSignedIn: window.gapi.auth2.getAuthInstance().isSignedIn.get()
+      isSignedIn: window.gapi.auth2.getAuthInstance().isSignedIn.get(),
+      userName:window.gapi.auth2.getAuthInstance().currentUser.Ab.w3.ig
     });
   };
 
@@ -71,7 +72,11 @@ export default class GoogleAuth extends Component {
     window.gapi.auth2
       .getAuthInstance()
       .grantOfflineAccess()
-      .then(this.signInCallback);
+      .then(this.signInCallback).then(()=>{
+        this.setState({isSignedIn:this.state.isSignedIn })
+      });
+
+      
   };
 
   onSignOut = () => {
@@ -85,7 +90,7 @@ export default class GoogleAuth extends Component {
     if (this.state.isSignedIn) {
       return (
         <Button onClick={this.onSignOut} variant="contained" color="secondary">
-          <i className="fab fa-google" /> Sign out
+          <i className="fab fa-google" /> Sign out {this.state.userName}
         </Button>
       );
     } else {

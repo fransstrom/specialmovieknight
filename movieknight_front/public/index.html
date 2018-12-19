@@ -24,30 +24,11 @@
     </script>
     <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
     </script>
-    <script>
-        function start() {
-          gapi.load('auth2', function() {
-            auth2 = gapi.auth2.init({
-              client_id: '892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com',
-              // Scopes to request in addition to 'profile' and 'email'
-              scope: 'https://www.googleapis.com/auth/calendar'
-            });
-          });
-        }
-
     
-      </script>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
   </head>
   
   <body>
-      <!-- <button id="signinButton">Sign in with Google</button>
-      <script>
-        $('#signinButton').click(function() {
-          // signInCallback defined in step 6.
-          auth2.grantOfflineAccess().then(signInCallback);
-        });
-      </script> -->
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
@@ -62,34 +43,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script>
-        function signInCallback(authResult) {
-          if (authResult['code']) {
-        
-            // Hide the sign-in button now that the user is authorized, for example:
-            $('#signinButton').attr('style', 'display: none');
-        
-            // Send the code to the server
-            $.ajax({
-              type: 'POST',
-              url: 'http://localhost:6969/google',
-              // Always include an `X-Requested-With` header in every AJAX request,
-              // to protect against CSRF attacks.
-              headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-              },
-              contentType: 'application/octet-stream; charset=utf-8',
-              success: function(result) {
-                // Handle or verify the server response.
-                console.log(result)
-              },
-              processData: false,
-              data: authResult['code']
-            });
-          } else {
-            // There was an error.
-          }
-        }
-        </script>
+
   </body>
 </html>

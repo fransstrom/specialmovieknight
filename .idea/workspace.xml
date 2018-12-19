@@ -4,6 +4,7 @@
     <list default="true" id="af301a54-dbf4-4c6c-888c-10463e4c95e5" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/clientNavbarComponent.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/movieknight_front/src/components/css/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/specialmovieknight.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/specialmovieknight.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -408,7 +409,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545251450759" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545251951192" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../R&amp;B Kevin W/R&amp;N" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
@@ -417,7 +418,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15024233" />
     <property name="project.structure.side.proportion" value="0.46100917" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2018.2.7\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -506,12 +507,12 @@
       <workItem from="1545047784778" duration="15432000" />
       <workItem from="1545122473877" duration="287000" />
       <workItem from="1545123419556" duration="3718000" />
-      <workItem from="1545129453613" duration="13312000" />
+      <workItem from="1545129453613" duration="13695000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62931000" />
+    <option name="totallyTimeSpent" value="63314000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />

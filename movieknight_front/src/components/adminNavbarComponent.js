@@ -90,9 +90,6 @@ class PrimarySearchAppBar extends React.Component {
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        {/*<Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                            Admin
-                        </Typography>*/}
                         <span className={"searchBar"}>
                         <div className={classes.search}>
                             <div className={classes.searchIcon}></div>

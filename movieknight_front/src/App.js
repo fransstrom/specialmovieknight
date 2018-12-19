@@ -30,7 +30,7 @@ class App extends Component {
             })
     }
 
-     getMovieInfo = (query) =>{
+    getMovieInfo = (query) =>{
         let url="http://localhost:6969/omdb/movies/get/?s="+query;
         axios.get(url)
             .then(res => {

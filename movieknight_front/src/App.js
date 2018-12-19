@@ -3,11 +3,14 @@ import './App.css';
 import './components/adminGridComponent';
 import './components/adminCardComponent';
 import axios from 'axios';
+
 import CenteredGrid from "./components/adminGridComponent";
 import PrimarySearchAppBar from "./components/adminNavbarComponent";
 import ClientSearchAppBar from "./components/clientNavbarComponent";
 
+
 class App extends Component {
+
     constructor(props){
         super();
         this.state = {
@@ -89,6 +92,7 @@ class App extends Component {
             );
         }
     }
+
 }
 
 export default App;

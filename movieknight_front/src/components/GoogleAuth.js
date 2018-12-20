@@ -19,8 +19,7 @@ export default class GoogleAuth extends Component {
         .then(() => {
           const auth = window.gapi.auth2.getAuthInstance();
           this.setState({
-            isSignedIn: auth.isSignedIn.get(),
-           userName: window.gapi.auth2.getAuthInstance().currentUser.Ab.w3.ig
+            isSignedIn: auth.isSignedIn.get()
           });
           auth.isSignedIn.listen(this.onAuthChange);
         });

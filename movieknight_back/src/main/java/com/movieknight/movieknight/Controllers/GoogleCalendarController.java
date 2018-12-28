@@ -1,7 +1,6 @@
 package com.movieknight.movieknight.Controllers;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -12,7 +11,6 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
-import com.movieknight.movieknight.Database.entities.User1;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,7 +58,6 @@ public class GoogleCalendarController {
     private String clientSecret;
     @Value("${google.client.redirectUri}")
     private String redirectURI;
-
     @Value("${google.common-calendarId}")
     private String commonCalendarId;
 

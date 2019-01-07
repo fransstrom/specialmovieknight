@@ -8,7 +8,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import './css/navbar.css';
-import GoogleAuth from './GoogleAuth';
+//import GoogleAuth from './GoogleAuth';
 
 const styles = theme => ({
     root: {
@@ -110,8 +110,9 @@ class PrimarySearchAppBar extends React.Component {
                         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                             Search for movies
                         </Typography>
+{/*
                     <GoogleAuth></GoogleAuth>
-
+*/}
                     </Toolbar>
                 </AppBar>
             </div>

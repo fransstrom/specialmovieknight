@@ -47,6 +47,12 @@
   padding: 30px;
 }
 
+.App-body-background-client {
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/RJZZIy2/movie-theater-cloth-curtains-open_v1nh4alzz__F0003.png");
+}
+
+
+
 .App-footer {
   background-color: #5c6bc0;
   height: 5vh;

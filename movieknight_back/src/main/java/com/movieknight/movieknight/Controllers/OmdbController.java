@@ -37,31 +37,31 @@ public class OmdbController {
 
     @CrossOrigin
     @RequestMapping(value = "/omdb/movies/search/", method = RequestMethod.GET)
-    public ResponseEntity<SearchResults> searchResultsWithStatusCode(@RequestParam(value="s", defaultValue="Shrek") String search) throws OMDBException{
+    public ResponseEntity<SearchResults> searchResultsWithStatusCode(@RequestParam(value = "s", defaultValue = "Shrek") String search) throws OMDBException {
         OmdbApi omdb = new OmdbApi("831f2756");
         SearchResults results = omdb.search(new OmdbBuilder().setSearchTerm(search).setTypeMovie().build());
-        if (search.toLowerCase().equals("kevinfrans")){
+        if (search.toLowerCase().equals("kevinfrans")) {
             return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
-        }else if (results==null){
+        } else if (results == null) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }else if(results.getTotalResults()==0){
+        } else if (results.getTotalResults() == 0) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }else {
+        } else {
             return new ResponseEntity<>(results, HttpStatus.OK);
         }
     }
 
     @CrossOrigin
     @RequestMapping(value = "/omdb/movies/get/", method = RequestMethod.GET)
-    public ResponseEntity<OmdbVideoFull> omdbVideoFullWithStatusCode(@RequestParam(value="s", defaultValue="tt0126029") String search) throws OMDBException{
+    public ResponseEntity<OmdbVideoFull> omdbVideoFullWithStatusCode(@RequestParam(value = "s", defaultValue = "tt0126029") String search) throws OMDBException {
         OmdbApi omdb = new OmdbApi("831f2756");
         OmdbVideoFull results = omdb.getInfo(new OmdbBuilder().setImdbId(search).setTypeMovie().build());
-         if (results==null){
-             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-         }else if (results.getActors().toLowerCase().contains("nicolas cage")){
-             return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
-         } else {
+        if (results == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else if (results.getActors().toLowerCase().contains("nicolas cage")) {
+            return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
+        } else {
             return new ResponseEntity<>(results, HttpStatus.OK);
-    }
+        }
     }
 }

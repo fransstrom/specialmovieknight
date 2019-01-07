@@ -68,7 +68,7 @@ public class GoogleCalendarController {
 
     private final DateTime date1 = new DateTime(String.valueOf(LocalDateTime.now()));
 
-    private final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
+    private final DateTime date2 = new DateTime("2019-02-28T16:30:00.000+05:30");
 
     public void setEvents(Set<Event> events) {
         this.events = events;

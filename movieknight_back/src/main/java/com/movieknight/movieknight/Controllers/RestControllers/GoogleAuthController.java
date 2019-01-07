@@ -3,18 +3,29 @@ package com.movieknight.movieknight.Controllers.RestControllers;
 import com.google.api.client.googleapis.auth.oauth2.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.drive.Drive;
-import com.google.api.services.drive.model.File;
+import com.google.api.client.util.DateTime;
+import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
+import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @RestController
 public class GoogleAuthController {
+    @Autowired
+    UnavalibleDateRepository dateRepository;
 
     @CrossOrigin(origins="http://localhost:3000")
     @RequestMapping(value="/google", method = RequestMethod.POST)
@@ -78,6 +89,36 @@ public class GoogleAuthController {
         String familyName = (String) payload.get("family_name");
         String givenName = (String) payload.get("given_name");
         System.out.println(givenName+" "+familyName);
+        System.out.println();
     }
 
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @RequestMapping(value="/getdates", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<UnavailableDateTime>> dates() throws ParseException {
+
+
+        ArrayList<UnavailableDateTime> dbDates= (ArrayList<UnavailableDateTime>) dateRepository.findAll();
+        ArrayList<UnavailableDateTime> dates= new ArrayList<>();
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String startDate;
+        String startTime;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+        for(int i=0; i<dbDates.size(); i++)
+        {
+            startDate=dbDates.get(i).getStartDateTime().substring(0, 10);
+            startTime=dbDates.get(i).getStartDateTime().substring(10,16);
+            if (simpleDateFormat.parse(startDate+startTime).before(new Date())) {
+                System.out.println("Date has passed");
+            }else{
+                System.out.println("Future date");
+                dates.add(dbDates.get(i));
+            }
+        }
+
+
+
+        return new ResponseEntity<>(dates, HttpStatus.OK);
+    }
 }

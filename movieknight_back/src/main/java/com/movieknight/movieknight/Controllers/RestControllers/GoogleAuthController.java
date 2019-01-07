@@ -27,8 +27,8 @@ public class GoogleAuthController {
     @Autowired
     UnavalibleDateRepository dateRepository;
 
-    @CrossOrigin(origins="http://localhost:3000")
-    @RequestMapping(value="/google", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/google", method = RequestMethod.POST)
     public void test(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) throws IOException {
         // (Receive authCode via HTTPS POST)
 
@@ -43,7 +43,8 @@ public class GoogleAuthController {
 // You can also find your Web application client ID and client secret from the
 // console and specify them directly when you create the GoogleAuthorizationCodeTokenRequest
 // object.
-        java.io.File CLIENT_SECRET_FILE =  new ClassPathResource("client_secret_892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com.json").getFile();;
+        java.io.File CLIENT_SECRET_FILE = new ClassPathResource("client_secret_892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com.json").getFile();
+        ;
 
 // Exchange auth code for access token
         GoogleClientSecrets clientSecrets =
@@ -88,37 +89,34 @@ public class GoogleAuthController {
         String locale = (String) payload.get("locale");
         String familyName = (String) payload.get("family_name");
         String givenName = (String) payload.get("given_name");
-        System.out.println(givenName+" "+familyName);
+        System.out.println(givenName + " " + familyName);
         System.out.println();
     }
 
 
-    @CrossOrigin(origins="http://localhost:3000")
-    @RequestMapping(value="/getdates", method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/getdates", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<UnavailableDateTime>> dates() throws ParseException {
+        ArrayList<UnavailableDateTime> dbDates = (ArrayList<UnavailableDateTime>) dateRepository.findAll();
+        ArrayList<UnavailableDateTime> dates = new ArrayList<>();
+        String startDateTime;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
-
-        ArrayList<UnavailableDateTime> dbDates= (ArrayList<UnavailableDateTime>) dateRepository.findAll();
-        ArrayList<UnavailableDateTime> dates= new ArrayList<>();
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        String startDate;
-        String startTime;
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-
-        for(int i=0; i<dbDates.size(); i++)
-        {
-            startDate=dbDates.get(i).getStartDateTime().substring(0, 10);
-            startTime=dbDates.get(i).getStartDateTime().substring(10,16);
-            if (simpleDateFormat.parse(startDate+startTime).before(new Date())) {
+        for (int i = 0; i < dbDates.size(); i++) {
+            startDateTime = dbDates.get(i).getStartDateTime().substring(0, 16);
+            if (simpleDateFormat.parse(startDateTime).before(new Date())) {
                 System.out.println("Date has passed");
-            }else{
+            } else {
                 System.out.println("Future date");
                 dates.add(dbDates.get(i));
             }
         }
 
+        if (dates.size() <= 0) {
+            return new ResponseEntity<>(dates, HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(dates, HttpStatus.OK);
+        }
 
-
-        return new ResponseEntity<>(dates, HttpStatus.OK);
     }
 }

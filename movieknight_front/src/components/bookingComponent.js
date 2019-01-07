@@ -23,10 +23,17 @@ export default class bookingComponent extends Component {
     }
  
   render() {
+     let unavailable= this.state.dates.map(e=>{
+     return(<li>{e.startDateTime.substring(0,16).replace('T',' ')} - {e.endDateTime.substring(0,16).replace('T',' ')}</li>)
+      })
       console.log(this.state)
     return (
       <div>
         <p>booking</p>
+        <ul>
+
+            {unavailable}
+        </ul>
       </div>
     )
   }

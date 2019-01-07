@@ -57,10 +57,12 @@ export default class GoogleAuth extends Component {
       });
     } else {
       // There was an error.
-      // Get refreshtoken from database userid
+      // Get refreshtoken from database user id
      let userId= window.gapi.auth2.getAuthInstance().currentUser.Ab.El;
      console.log(userId)
     }
+
+    
   };
 
   onAuthChange = () => {

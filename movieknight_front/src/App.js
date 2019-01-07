@@ -21,7 +21,7 @@ class App extends Component {
     }
 
     search = (query) => {
-        let url="http://localhost:6969/omdb/movies/search/?s="+query;
+        let url="/omdb/movies/search/?s="+query;
         axios.get(url)
             .then(res => {
                 const movieList = res.data;
@@ -34,7 +34,7 @@ class App extends Component {
     }
 
     getMovieInfo = (query) =>{
-        let url="http://localhost:6969/omdb/movies/get/?s="+query;
+        let url="/omdb/movies/get/?s="+query;
         axios.get(url)
             .then(res => {
                 const movieInfo = res.data;
@@ -43,7 +43,7 @@ class App extends Component {
     }
 
     async addToDataBase(query) {
-        let url = "http://localhost:6969/omdb/movies/get/?s=" + query;
+        let url = "/omdb/movies/get/?s=" + query;
         await axios.get(url)
             .then(res => {
                 const movieInfo = res.data;

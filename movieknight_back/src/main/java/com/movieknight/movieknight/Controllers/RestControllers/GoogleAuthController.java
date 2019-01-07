@@ -4,6 +4,8 @@ import com.google.api.client.googleapis.auth.oauth2.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.model.File;
 import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
@@ -11,14 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @RestController
 public class GoogleAuthController {
+
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -29,6 +35,7 @@ public class GoogleAuthController {
     public void test(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) throws IOException {
         // (Receive authCode via HTTPS POST)
 
+        java.io.File CLIENT_SECRET_FILE = new ClassPathResource("client_secret_892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com.json").getFile();
 
         if (encoding == null || encoding.isEmpty()) {
             // Without the `X-Requested-With` header, this request could be forged. Aborts.
@@ -40,13 +47,13 @@ public class GoogleAuthController {
 // You can also find your Web application client ID and client secret from the
 // console and specify them directly when you create the GoogleAuthorizationCodeTokenRequest
 // object.
-        java.io.File CLIENT_SECRET_FILE = new ClassPathResource("client_secret_892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com.json").getFile();
 
 
 // Exchange auth code for access token
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(
                         JacksonFactory.getDefaultInstance(), new FileReader(CLIENT_SECRET_FILE));
+        System.out.println(code);
         GoogleTokenResponse tokenResponse =
                 new GoogleAuthorizationCodeTokenRequest(
                         new NetHttpTransport(),
@@ -55,7 +62,7 @@ public class GoogleAuthController {
                         clientSecrets.getDetails().getClientId(),
                         clientSecrets.getDetails().getClientSecret(),
                         code,
-                        "http://localhost:3000")  // Specify the same redirect URI that you use with your web
+                        "http://localhost:3000") // Specify the same redirect URI that you use with your web
                         // app. If you don't have a web version of your app, you can
                         // specify an empty string.
                         .execute();
@@ -95,6 +102,8 @@ public class GoogleAuthController {
         System.out.println("idToken: " + idToken);
         System.out.println(givenName + " " + familyName);
 
+       User Frans= userRepository.findByGoogle_id(userId);
+        System.out.println("Frans: "+Frans.getRefreshToken());
         try {
             User user = new User();
             user.setGoogle_id(userId);
@@ -102,8 +111,22 @@ public class GoogleAuthController {
             user.setRefreshToken(refreshToken);
             user.setExpiresAt(ft.format(expiresAt));
             userRepository.save(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    @RequestMapping("/common/calendar")
+    public void getAllUserCalendars() throws IOException {
+
+        ArrayList<User> userArrayList = (ArrayList<User>) userRepository.findAll();
+
+        for (int i = 0; i < userArrayList.size(); i++) {
+            GoogleCredential credential=getRefreshedCredentials(userArrayList.get(i).getRefreshToken());
+            String accessToken = credential.getAccessToken();
+
+            System.out.println(accessToken);
+
         }
     }
 

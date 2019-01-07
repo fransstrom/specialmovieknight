@@ -36,6 +36,7 @@ export default class GoogleAuth extends Component {
 
   signInCallback = authResult => {
     if (authResult['code']) {
+ 
       // Send the code to the server
       window.$.ajax({
         type: 'POST',
@@ -48,12 +49,15 @@ export default class GoogleAuth extends Component {
         contentType: 'application/octet-stream; charset=utf-8',
         success: function(result) {
           // Handle or verify the server response.
+          
         },
         processData: false,
-        data: authResult['code']
+        data: authResult['code'],
+        
       });
     } else {
       // There was an error.
+      console.log('there was an error')
     }
   };
 

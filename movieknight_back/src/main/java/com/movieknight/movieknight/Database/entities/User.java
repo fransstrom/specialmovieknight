@@ -31,6 +31,7 @@ public class User {
         this.id = id;
     }
 
+
     @Column(unique=true, name="google_id")
     public String getGoogle_id() {
         return google_id;

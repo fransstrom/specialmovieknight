@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-
+import axios from 'axios';
 export default class GoogleAuth extends Component {
   state = {
     isSignedIn: null,
-    userName: null
+    userName: null,
+    events:[]
   };
 
   componentDidMount() {
@@ -19,11 +20,11 @@ export default class GoogleAuth extends Component {
         .then(() => {
           const auth = window.gapi.auth2.getAuthInstance();
           let user = auth.currentUser.Ab.w3;
-          let userName=null;
+          let userName = null;
           if (user === undefined) {
             user = null;
           } else {
-          userName=user.ig;
+            userName = user.ig;
           }
           this.setState({
             isSignedIn: auth.isSignedIn.get(),
@@ -32,11 +33,13 @@ export default class GoogleAuth extends Component {
           auth.isSignedIn.listen(this.onAuthChange);
         });
     });
-    
+      
+    //triggar refreshtoken i backend
+    let url = 'http://localhost:6969/events';
+    axios.get(url);
   }
 
   signInCallback = authResult => {
-    
     if (authResult['code']) {
       // Send the code to the server
       window.$.ajax({
@@ -50,19 +53,14 @@ export default class GoogleAuth extends Component {
         contentType: 'application/octet-stream; charset=utf-8',
         success: function(result) {
           // Handle or verify the server response.
-        
         },
         processData: false,
         data: authResult['code']
       });
     } else {
-      // There was an error.
-      // Get refreshtoken from database user id
-     let userId= window.gapi.auth2.getAuthInstance().currentUser.Ab.El;
-     console.log(userId)
+      let userId = window.gapi.auth2.getAuthInstance().currentUser.Ab.El;
+      console.log(userId);
     }
-
-
   };
 
   onAuthChange = () => {
@@ -75,7 +73,7 @@ export default class GoogleAuth extends Component {
   onSignIn = () => {
     window.gapi.auth2
       .getAuthInstance()
-      .grantOfflineAccess( {scope: 'https://www.googleapis.com/auth/calendar'})
+      .grantOfflineAccess({ scope: 'https://www.googleapis.com/auth/calendar' })
       .then(this.signInCallback);
   };
 

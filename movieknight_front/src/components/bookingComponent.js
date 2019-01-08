@@ -34,8 +34,6 @@ export default class bookingComponent extends Component {
       <div>
         <p>booking</p>
         <ul>{unavailableDates}</ul>
-        <iframe src="https://calendar.google.com/calendar/embed?src=ij62rf997musf786sqmdr0e9a8%40group.calendar.google.com&ctz=Europe%2FStockholm" style={{border: 0}} width={800} height={600} frameBorder={0} scrolling="no" title="calendar">
-      </iframe>
       </div>
     );
   }

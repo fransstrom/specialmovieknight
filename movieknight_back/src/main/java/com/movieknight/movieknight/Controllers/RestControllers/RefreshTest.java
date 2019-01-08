@@ -25,8 +25,7 @@ public class RefreshTest {
     private final String CLIENT_ID = "892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com";
     private final String CLIENT_SECRET = "1VC8GEWAqWJ_WDR5cz71wt54";
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+
 
     public static <T> T firstNonNull(T... params) {
         for (T param : params)
@@ -214,7 +213,7 @@ public class RefreshTest {
                 if (end == null) { // If it's an all-day-event - store the date instead
                     end = event.getStart().getDate();
                 }
-                System.out.printf("%s (%s) -> (%s)\n", event.getSummary(), start, end);
+                System.out.printf("%s (%s) -> (%s) dsadsa\n", event.getSummary(), start, end);
             }
         }
 
@@ -227,18 +226,6 @@ public class RefreshTest {
 
     }
 
-    private void register(){
-        // Get login
-
-//        SecurityContextHolder.getContext().getAuthentication()
-
-        // Set login
-//        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userName, password);
-//        Authentication authentication = authenticationManager.authenticate(token);
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
 
 
-    @Autowired
-    private UserRepository userRepository;
 }

@@ -210,12 +210,9 @@ public class GoogleAuthController {
                 System.out.println("startTIME = "+ item.getStart().getDate().toString()+"T00:00:00.000+01:00"+" endTime = "+item.getEnd().getDate().toString() );
                 startDateTime=new DateTime(item.getStart().getDate().toString()+"T00:00:00.000+01:00");
                 endDateTime=new DateTime(item.getEnd().getDate().toString()+"T00:00:00.000+01:00");
-
             }
 
             unavailableDateTime.setStartDateTime(startDateTime.toString());
-
-
             System.out.println("title: " + item.getSummary());
             System.out.println("Start: " + startDateTime);
             System.out.println("End: " + endDateTime);

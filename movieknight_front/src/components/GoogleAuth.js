@@ -33,16 +33,10 @@ export default class GoogleAuth extends Component {
           auth.isSignedIn.listen(this.onAuthChange);
         });
     });
-
+      
+    //triggar refreshtoken i backend
     let url = 'http://localhost:6969/events';
-    axios.get(url).then(res => {
-      const events = res.data;
-      if (events != null) {
-        this.setState({ events });
-      } else {
-        this.setState({ events: [] });
-      }
-    });
+    axios.get(url);
   }
 
   signInCallback = authResult => {
@@ -64,8 +58,6 @@ export default class GoogleAuth extends Component {
         data: authResult['code']
       });
     } else {
-      // There was an error.
-      // Get refreshtoken from database user id
       let userId = window.gapi.auth2.getAuthInstance().currentUser.Ab.El;
       console.log(userId);
     }

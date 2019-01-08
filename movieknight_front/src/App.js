@@ -7,14 +7,14 @@ import axios from 'axios';
 import CenteredGrid from "./components/adminGridComponent";
 import PrimarySearchAppBar from "./components/adminNavbarComponent";
 import ClientSearchAppBar from "./components/clientNavbarComponent";
-
+import Booking from './components/bookingComponent'
 
 class App extends Component {
 
     constructor(props){
         super();
         this.state = {
-            adminState: true,
+            adminState: false,
             movieList: [],
             movieInfo: {}
         }
@@ -70,6 +70,7 @@ class App extends Component {
                                       getMovieInfo={this.getMovieInfo.bind(this)}
                                       addToDataBase={this.addToDataBase.bind(this)}/>
                     </div>
+                   
                 </div>
             );
         }
@@ -88,7 +89,13 @@ class App extends Component {
                         <CenteredGrid movieListFromAPI={this.state.movieList} movieInfoFromAPI={this.state.movieInfo}
                                       getMovieInfo={this.getMovieInfo.bind(this)}
                                       addToDataBase={this.addToDataBase.bind(this)}/>
+
+                                      
                     </div>
+                    <div>
+                    <Booking></Booking>
+                    </div>
+                    
                 </div>
             );
         }

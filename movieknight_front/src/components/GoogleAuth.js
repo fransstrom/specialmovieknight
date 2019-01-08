@@ -32,9 +32,11 @@ export default class GoogleAuth extends Component {
           auth.isSignedIn.listen(this.onAuthChange);
         });
     });
+    
   }
 
   signInCallback = authResult => {
+    
     if (authResult['code']) {
       // Send the code to the server
       window.$.ajax({
@@ -48,13 +50,19 @@ export default class GoogleAuth extends Component {
         contentType: 'application/octet-stream; charset=utf-8',
         success: function(result) {
           // Handle or verify the server response.
+        
         },
         processData: false,
         data: authResult['code']
       });
     } else {
       // There was an error.
+      // Get refreshtoken from database user id
+     let userId= window.gapi.auth2.getAuthInstance().currentUser.Ab.El;
+     console.log(userId)
     }
+
+
   };
 
   onAuthChange = () => {
@@ -67,7 +75,7 @@ export default class GoogleAuth extends Component {
   onSignIn = () => {
     window.gapi.auth2
       .getAuthInstance()
-      .grantOfflineAccess()
+      .grantOfflineAccess( {scope: 'https://www.googleapis.com/auth/calendar'})
       .then(this.signInCallback);
   };
 

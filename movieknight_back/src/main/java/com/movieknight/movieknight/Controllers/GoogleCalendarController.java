@@ -68,7 +68,7 @@ public class GoogleCalendarController {
 
     private final DateTime date1 = new DateTime(String.valueOf(LocalDateTime.now()));
 
-    private final DateTime date2 = new DateTime("2018-12-28T16:30:00.000+05:30");
+    private final DateTime date2 = new DateTime("2019-12-28T16:30:00.000+05:30");
 
     public void setEvents(Set<Event> events) {
         this.events = events;
@@ -93,14 +93,13 @@ public class GoogleCalendarController {
                     .setApplicationName(APPLICATION_NAME).build();
 
             Calendar.Events events = client.events();
-
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
-
             message = eventList.getItems().toString();
-
             List<Event> items = eventList.getItems();
 
             insertUnavailableDatesToDB(items);
+            insertBusyDateTimeToCommonCalendar();
+
 
         } catch (Exception e) {
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."

@@ -93,11 +93,8 @@ public class GoogleCalendarController {
                     .setApplicationName(APPLICATION_NAME).build();
 
             Calendar.Events events = client.events();
-
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
-
             message = eventList.getItems().toString();
-
             List<Event> items = eventList.getItems();
 
             insertUnavailableDatesToDB(items);

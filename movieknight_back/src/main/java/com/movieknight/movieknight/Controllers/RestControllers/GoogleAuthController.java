@@ -8,13 +8,16 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.Controllers.GoogleCalendarController;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
+import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +40,12 @@ public class GoogleAuthController {
 
 
     @Autowired
-    UnavalibleDateRepository dateRepository;
+    UserRepository userRepository;
+    @Autowired
+    UnavalibleDateRepository unavalibleDateRepository;
+
+    @Value("${google.common-calendarId}")
+    private String commonCalendarId;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/google", method = RequestMethod.POST)
@@ -125,8 +133,10 @@ public class GoogleAuthController {
                 }
                 System.out.printf("%s (%s) -> (%s)\n", event.getSummary(), start, end);
             }
+
+
         }
-        
+
         GoogleIdToken idToken = tokenResponse.parseIdToken();
         GoogleIdToken.Payload payload = idToken.getPayload();
         System.out.println(payload);
@@ -140,13 +150,16 @@ public class GoogleAuthController {
         String givenName = (String) payload.get("given_name");
         System.out.println(givenName + " " + familyName);
         System.out.println();
+
+        insertBusyDateTimeToCommonCalendar();
+        insertUnavailableDatesToDB(items);
     }
 
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/getdates", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<UnavailableDateTime>> dates() throws ParseException {
-        ArrayList<UnavailableDateTime> dbDates = (ArrayList<UnavailableDateTime>) dateRepository.findAll();
+        ArrayList<UnavailableDateTime> dbDates = (ArrayList<UnavailableDateTime>) unavalibleDateRepository.findAll();
         ArrayList<UnavailableDateTime> dates = new ArrayList<>();
         String startDateTime;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -167,5 +180,60 @@ public class GoogleAuthController {
             return new ResponseEntity<>(dates, HttpStatus.OK);
         }
 
+    }
+
+
+
+
+    private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
+        for (Event item : items) {
+            if (item.getStart().getDateTime() != null) {
+                DateTime startDateTime = item.getStart().getDateTime();
+                DateTime endDateTime = item.getEnd().getDateTime();
+                UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
+
+                unavailableDateTime.setStartDateTime(startDateTime.toString());
+                System.out.println("title: " + item.getSummary());
+                System.out.println("Start: " + startDateTime);
+                System.out.println("End: " + endDateTime);
+                unavailableDateTime.setEndDateTime(endDateTime.toString());
+                unavailableDateTime.setId(item.getId());
+                try {
+                    unavalibleDateRepository.save(unavailableDateTime);
+                } catch (Exception ignored) {
+
+                }
+            }
+        }
+
+    }
+
+    private void insertBusyDateTimeToCommonCalendar() throws IOException {
+        //insert dates into common calendar
+
+        Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
+        for (UnavailableDateTime date : unavalibleDates) {
+            try {
+                Event event = new Event()
+                        .setSummary("Busy");
+
+                EventDateTime start = new EventDateTime()
+                        .setDateTime(DateTime.parseRfc3339(date.getStartDateTime()))
+                        .setTimeZone("Europe/Stockholm");
+                event.setStart(start);
+
+                EventDateTime end = new EventDateTime()
+                        .setDateTime(DateTime.parseRfc3339(date.getEndDateTime()))
+                        .setTimeZone("Europe/Stockholm");
+                event.setEnd(end);
+                event.setColorId("3");
+                event.setId(date.getId());
+                event = client.events().insert(commonCalendarId, event).execute();
+
+                System.out.printf("Event created: %s\n", event.getHtmlLink());
+            } catch (Exception e) {
+                System.err.println("From inser to common calendar: "+e.getMessage());
+            }
+        }
     }
 }

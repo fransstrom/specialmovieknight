@@ -96,10 +96,12 @@ public class GoogleCalendarController {
             eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
             message = eventList.getItems().toString();
             List<Event> items = eventList.getItems();
+/*
 
             insertUnavailableDatesToDB(items);
             insertBusyDateTimeToCommonCalendar();
 
+*/
 
         } catch (Exception e) {
             logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
@@ -112,6 +114,7 @@ public class GoogleCalendarController {
 
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+/*
 
     private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
         for (Event item : items) {
@@ -166,6 +169,7 @@ public class GoogleCalendarController {
         }
     }
 
+*/
 
     public Set<Event> getEvents() throws IOException {
         return this.events;

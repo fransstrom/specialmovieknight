@@ -205,12 +205,10 @@ public class GoogleAuthController {
                 }
             }
         }
-
     }
 
     private void insertBusyDateTimeToCommonCalendar() throws IOException {
         //insert dates into common calendar
-
         Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
         for (UnavailableDateTime date : unavalibleDates) {
             try {

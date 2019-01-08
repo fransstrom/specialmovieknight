@@ -12,6 +12,7 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.Controllers.GoogleCalendarController;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
+import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.commons.logging.Log;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.FileReader;
 import java.io.IOException;
+
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -133,8 +136,7 @@ public class GoogleAuthController {
                 }
                 System.out.printf("%s (%s) -> (%s)\n", event.getSummary(), start, end);
             }
-
-
+            insertUnavailableDatesToDB(items);
         }
 
         GoogleIdToken idToken = tokenResponse.parseIdToken();
@@ -148,11 +150,24 @@ public class GoogleAuthController {
         String locale = (String) payload.get("locale");
         String familyName = (String) payload.get("family_name");
         String givenName = (String) payload.get("given_name");
-        System.out.println(givenName + " " + familyName);
-        System.out.println();
+/*        System.out.println(givenName + " " + familyName);
+        System.out.println();*/
 
-        insertBusyDateTimeToCommonCalendar();
+        Date expire = new Date(System.currentTimeMillis() + 3600 * 1000);
+        Timestamp ts=new Timestamp(expire.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(formatter.format(ts));
+        System.out.println("Expiresesese"+expire);
+
+        User user = new User();
+        user.setRefreshToken(refreshToken);
+        user.setAccessToken(accessToken);
+        user.setId(userId);
+        user.setExpires(formatter.format(ts));
+
+        userRepository.save(user);
         insertUnavailableDatesToDB(items);
+        insertBusyDateTimeToCommonCalendar(calendar);
     }
 
 
@@ -183,8 +198,6 @@ public class GoogleAuthController {
     }
 
 
-
-
     private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
         for (Event item : items) {
             if (item.getStart().getDateTime() != null) {
@@ -205,9 +218,10 @@ public class GoogleAuthController {
                 }
             }
         }
+
     }
 
-    private void insertBusyDateTimeToCommonCalendar() throws IOException {
+    private void insertBusyDateTimeToCommonCalendar( Calendar calendar) throws IOException {
         //insert dates into common calendar
         Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
         for (UnavailableDateTime date : unavalibleDates) {
@@ -226,12 +240,13 @@ public class GoogleAuthController {
                 event.setEnd(end);
                 event.setColorId("3");
                 event.setId(date.getId());
-                event = client.events().insert(commonCalendarId, event).execute();
+                event = calendar.events().insert(commonCalendarId, event).execute();
 
                 System.out.printf("Event created: %s\n", event.getHtmlLink());
             } catch (Exception e) {
-                System.err.println("From inser to common calendar: "+e.getMessage());
+                System.err.println("From insert to common calendar: "+e.getMessage());
             }
         }
     }
+
 }

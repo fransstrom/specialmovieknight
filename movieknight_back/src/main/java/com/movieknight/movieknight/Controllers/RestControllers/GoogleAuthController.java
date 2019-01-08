@@ -153,11 +153,11 @@ public class GoogleAuthController {
 /*        System.out.println(givenName + " " + familyName);
         System.out.println();*/
 
-        Date expire = new Date(System.currentTimeMillis() + 3600 * 1000);
-        Timestamp ts=new Timestamp(expire.getTime());
+        Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
+        Timestamp ts = new Timestamp(expires.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(formatter.format(ts));
-        System.out.println("Expiresesese"+expire);
+        System.out.println("Expiresesese" + expires);
 
         User user = new User();
         user.setRefreshToken(refreshToken);
@@ -200,28 +200,38 @@ public class GoogleAuthController {
 
     private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
         for (Event item : items) {
-            if (item.getStart().getDateTime() != null) {
-                DateTime startDateTime = item.getStart().getDateTime();
-                DateTime endDateTime = item.getEnd().getDateTime();
-                UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
+            UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
 
-                unavailableDateTime.setStartDateTime(startDateTime.toString());
-                System.out.println("title: " + item.getSummary());
-                System.out.println("Start: " + startDateTime);
-                System.out.println("End: " + endDateTime);
-                unavailableDateTime.setEndDateTime(endDateTime.toString());
-                unavailableDateTime.setId(item.getId());
-                try {
-                    unavalibleDateRepository.save(unavailableDateTime);
-                } catch (Exception ignored) {
 
-                }
+            DateTime startDateTime = item.getStart().getDateTime();
+            DateTime endDateTime = item.getEnd().getDateTime();
+            if (startDateTime == null || endDateTime == null) {
+               // unavailableDateTime.setStartDateTime();
+                System.out.println("startTIME = "+ item.getStart().getDate().toString()+"T00:00:00.000+01:00"+" endTime = "+item.getEnd().getDate().toString() );
+                startDateTime=new DateTime(item.getStart().getDate().toString()+"T00:00:00.000+01:00");
+                endDateTime=new DateTime(item.getEnd().getDate().toString()+"T00:00:00.000+01:00");
+
+            }
+
+            unavailableDateTime.setStartDateTime(startDateTime.toString());
+
+
+            System.out.println("title: " + item.getSummary());
+            System.out.println("Start: " + startDateTime);
+            System.out.println("End: " + endDateTime);
+            unavailableDateTime.setEndDateTime(endDateTime.toString());
+            unavailableDateTime.setId(item.getId());
+
+            try {
+                unavalibleDateRepository.save(unavailableDateTime);
+            } catch (Exception ignored) {
+
             }
         }
 
     }
 
-    private void insertBusyDateTimeToCommonCalendar( Calendar calendar) throws IOException {
+    private void insertBusyDateTimeToCommonCalendar(Calendar calendar) throws IOException {
         //insert dates into common calendar
         Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
         for (UnavailableDateTime date : unavalibleDates) {
@@ -244,7 +254,7 @@ public class GoogleAuthController {
 
                 System.out.printf("Event created: %s\n", event.getHtmlLink());
             } catch (Exception e) {
-                System.err.println("From insert to common calendar: "+e.getMessage());
+                System.err.println("From insert to common calendar: " + e.getMessage());
             }
         }
     }

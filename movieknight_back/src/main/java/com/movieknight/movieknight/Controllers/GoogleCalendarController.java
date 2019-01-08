@@ -12,7 +12,7 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
-import com.movieknight.movieknight.Database.entities.User1;
+import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

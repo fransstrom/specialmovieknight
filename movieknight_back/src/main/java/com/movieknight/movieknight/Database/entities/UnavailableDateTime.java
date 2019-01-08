@@ -24,10 +24,6 @@ public class UnavailableDateTime {
         this.id = id;
     }
 
-
-
-
-
     public String getStartDateTime() {
         return startDateTime;
     }

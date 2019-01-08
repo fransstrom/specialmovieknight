@@ -50,7 +50,17 @@ class App extends Component {
                 const movieInfo = res.data;
                 this.setState({movieInfo: movieInfo});
             })
-        console.log("Added " + this.state.movieInfo.Title + " To DataBase");
+
+        let urlForPost = "http://localhost:6969/admin/addMovieToDatabase2/?id=" + this.state.movieInfo.imdbID;
+        axios.post(urlForPost, {
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        console.log("Added " + this.state.movieInfo.Title + " " + this.state.movieInfo.imdbID + " To DataBase");
     }
 
     render() {

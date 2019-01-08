@@ -64,4 +64,17 @@ public class OmdbController {
             return new ResponseEntity<>(results, HttpStatus.OK);
         }
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/admin/addMovieToDatabase2/", method = RequestMethod.POST)
+    public ResponseEntity<String> id(@RequestParam("id") String id) throws OMDBException {
+        OmdbApi omdb = new OmdbApi("831f2756");
+        OmdbVideoFull results = omdb.getInfo(new OmdbBuilder().setImdbId(id).setTypeMovie().build());
+        if (results==null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            System.out.println(results.getTitle());
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        }
+    }
 }

@@ -30,7 +30,7 @@ export default class GoogleAuth extends Component {
             userName: userName
           });
           auth.isSignedIn.listen(this.onAuthChange);
-        }).then(this.signInCallback);
+        });
     });
     
   }
@@ -62,7 +62,7 @@ export default class GoogleAuth extends Component {
      console.log(userId)
     }
 
-    
+
   };
 
   onAuthChange = () => {

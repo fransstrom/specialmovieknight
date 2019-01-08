@@ -1,11 +1,19 @@
 package com.movieknight.movieknight.Controllers.RestControllers;
 
 import com.google.api.client.googleapis.auth.oauth2.*;
+import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.Events;
+import com.movieknight.movieknight.Controllers.GoogleCalendarController;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
@@ -16,6 +24,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +33,9 @@ import java.util.List;
 
 @RestController
 public class GoogleAuthController {
+    private static com.google.api.services.calendar.Calendar client;
+
+
     @Autowired
     UnavalibleDateRepository dateRepository;
 
@@ -31,8 +43,6 @@ public class GoogleAuthController {
     @RequestMapping(value = "/google", method = RequestMethod.POST)
     public void test(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) throws IOException {
         // (Receive authCode via HTTPS POST)
-
-
         if (encoding == null || encoding.isEmpty()) {
             // Without the `X-Requested-With` header, this request could be forged. Aborts.
             System.out.println("Error, wrong headers");
@@ -44,7 +54,6 @@ public class GoogleAuthController {
 // console and specify them directly when you create the GoogleAuthorizationCodeTokenRequest
 // object.
         java.io.File CLIENT_SECRET_FILE = new ClassPathResource("client_secret_892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com.json").getFile();
-        ;
 
 // Exchange auth code for access token
         GoogleClientSecrets clientSecrets =
@@ -79,8 +88,48 @@ public class GoogleAuthController {
 //        File file = drive.files().get("appfolder").execute();
 
 // Get profile info from ID token
+
+
+        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
+        Calendar calendar =
+                new Calendar.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
+                        .setApplicationName("Movie Nights")
+                        .build();
+
+        DateTime now = new DateTime(System.currentTimeMillis());
+        Events events = null;
+        try {
+            events = calendar.events().list("primary")
+                    .setMaxResults(10)
+                    .setTimeMin(now)
+                    .setOrderBy("startTime")
+                    .setSingleEvents(true)
+                    .execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<Event> items = events.getItems();
+        if (items.isEmpty()) {
+            System.out.println("No upcoming events found.");
+        } else {
+            System.out.println("Upcoming events");
+            for (Event event : items) {
+                DateTime start = event.getStart().getDateTime();
+                if (start == null) { // If it's an all-day-event - store the date instead
+                    start = event.getStart().getDate();
+                }
+                DateTime end = event.getEnd().getDateTime();
+                if (end == null) { // If it's an all-day-event - store the date instead
+                    end = event.getStart().getDate();
+                }
+                System.out.printf("%s (%s) -> (%s)\n", event.getSummary(), start, end);
+            }
+        }
+        
         GoogleIdToken idToken = tokenResponse.parseIdToken();
         GoogleIdToken.Payload payload = idToken.getPayload();
+        System.out.println(payload);
         String userId = payload.getSubject();  // Use this value as a key to identify a user.
         String email = payload.getEmail();
         boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());

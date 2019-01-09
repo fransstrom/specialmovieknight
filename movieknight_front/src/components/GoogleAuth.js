@@ -5,7 +5,7 @@ export default class GoogleAuth extends Component {
   state = {
     isSignedIn: null,
     userName: null,
-    events:[]
+    events: []
   };
 
   componentDidMount() {
@@ -33,8 +33,6 @@ export default class GoogleAuth extends Component {
           auth.isSignedIn.listen(this.onAuthChange);
         });
     });
-      
-
   }
 
   signInCallback = authResult => {

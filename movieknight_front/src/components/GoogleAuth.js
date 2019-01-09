@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
+
 export default class GoogleAuth extends Component {
   state = {
     isSignedIn: null,
@@ -34,9 +34,7 @@ export default class GoogleAuth extends Component {
         });
     });
       
-    //triggar refreshtoken i backend
-    let url = 'http://localhost:6969/events';
-    axios.get(url);
+
   }
 
   signInCallback = authResult => {

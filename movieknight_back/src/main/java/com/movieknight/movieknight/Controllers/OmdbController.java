@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.movieknight.movieknight.Database.entities.MovieEntity;
+import com.movieknight.movieknight.Database.repositories.MovieRepository;
 import com.movieknight.movieknight.OmdbAPI.OMDBException;
 import com.movieknight.movieknight.OmdbAPI.OmdbApi;
 import com.movieknight.movieknight.OmdbAPI.model.OmdbVideoFull;
 import com.movieknight.movieknight.OmdbAPI.model.SearchResults;
 import com.movieknight.movieknight.OmdbAPI.tools.OmdbBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,8 @@ public class OmdbController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    @Autowired
+    MovieRepository movieRepository;
     /*@CrossOrigin
     @RequestMapping(value = "/omdb/movies/search/", method = RequestMethod.GET)
     public SearchResults searchResults(@RequestParam(value="s", defaultValue="Shrek") String search) throws OMDBException {
@@ -73,7 +78,18 @@ public class OmdbController {
         if (results==null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            System.out.println(results.getActors());
+            MovieEntity movie=new MovieEntity();
+            movie.setActors(results.getActors());
+            movie.setDescription(results.getPlot());
+            movie.setDuration(results.getRuntime());
+            movie.setId(results.getImdbID());
+            movie.setImdbRating(results.getImdbRating());
+            movie.setReleaseDate(results.getReleased());
+            movie.setTitle(results.getTitle());
+            movie.setPosterUrl(results.getPoster());
+            movie.setGenre(results.getGenre());
+            movie.setDirectors(results.getDirector());
+            movieRepository.save(movie);
             return new ResponseEntity<>(id, HttpStatus.OK);
         }
     }

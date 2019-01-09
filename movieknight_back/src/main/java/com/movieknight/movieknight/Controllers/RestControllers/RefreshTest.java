@@ -7,6 +7,7 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
+import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -103,7 +104,7 @@ public class RefreshTest {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    public ResponseEntity<List<Event>> restGetEvents() {
+    public ResponseEntity<List<UnavailableDateTime2>> restGetEvents() {
         String refreshToken;
         Iterable<User> userList = userRepository.findAll();
         GoogleCredential credential;
@@ -111,6 +112,9 @@ public class RefreshTest {
         List <Event> eventsToReturn=new ArrayList<>();
         Calendar calendar;
         List<Event> items;
+
+        List<UnavailableDateTime2> unavailableDates=new ArrayList<>();
+
         for (User user : userList) {
 
             refreshToken = user.getRefreshToken();
@@ -121,6 +125,7 @@ public class RefreshTest {
                 Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
                 Timestamp ts = new Timestamp(expires.getTime());
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
                 //new accessToken
                 newAccessToken = credential.getAccessToken();
                 user.setExpires(formatter.format(ts));
@@ -128,10 +133,19 @@ public class RefreshTest {
                 userRepository.save(user);
                 calendar = getCalendar(credential);
                 items = getEvents(calendar);
-                eventsToReturn.addAll(items);
+
                 for (Event event : items) {
                     DateTime start = firstNonNull(event.getStart().getDateTime(), event.getStart().getDate());
-                    System.out.printf("%s %s (%s)\n", "REGRESCHTEST", event.getSummary(), start);
+                    DateTime end = firstNonNull(event.getEnd().getDateTime(), event.getStart().getDate());
+                    System.out.printf("%s %s (%s) - (%s)\n", "REGRESCHTEST", event.getSummary(), start, end);
+
+                    eventsToReturn.add(event);
+
+                    if(event.getStart().getDateTime()!=null) {
+                        unavailableDates.add(new UnavailableDateTime2(event.getStart().getDateTime().toString(), event.getEnd().getDateTime().toString()));
+                    }else{
+                        unavailableDates.add(new UnavailableDateTime2(event.getStart().getDate().toString(), event.getEnd().getDate().toString()));
+                    }
                 }
             } else {
                 System.out.println("invalid refreshtoken for use with userID: " + user.getId());
@@ -155,7 +169,7 @@ public class RefreshTest {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(eventsToReturn, HttpStatus.OK);
+        return new ResponseEntity<>(unavailableDates, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)

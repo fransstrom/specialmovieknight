@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -134,6 +135,7 @@ public class RefreshTest {
                 calendar = getCalendar(credential);
                 items = getEvents(calendar);
 
+
                 for (Event event : items) {
                     DateTime start = firstNonNull(event.getStart().getDateTime(), event.getStart().getDate());
                     DateTime end = firstNonNull(event.getEnd().getDateTime(), event.getStart().getDate());
@@ -143,8 +145,12 @@ public class RefreshTest {
 
                     if(event.getStart().getDateTime()!=null) {
                         unavailableDates.add(new UnavailableDateTime2(event.getStart().getDateTime().toString(), event.getEnd().getDateTime().toString()));
+                        Date javaDate2 = new Date(event.getStart().getDateTime().getValue());
+                        System.out.println(javaDate2+" GOOGLE CONVERTED DATETIME");
                     }else{
                         unavailableDates.add(new UnavailableDateTime2(event.getStart().getDate().toString(), event.getEnd().getDate().toString()));
+                        Date javaDate = new Date(event.getStart().getDate().getValue());
+                        System.out.println(javaDate+" GOOGLE CONVERTED DATE");
                     }
                 }
             } else {
@@ -164,7 +170,7 @@ public class RefreshTest {
 
         }
 
-        // Use access token to call API
+
         if(eventsToReturn==null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -177,6 +183,21 @@ public class RefreshTest {
 
 
     }
+    public static List<Date> getDatesBetweenUsingJava7(
+            Date startDate, Date endDate) {
+        List<Date> datesInRange = new ArrayList<>();
+        java.util.Calendar calendar = new GregorianCalendar();
+        calendar.setTime(startDate);
 
+        java.util.Calendar endCalendar = new GregorianCalendar();
+        endCalendar.setTime(endDate);
+
+        while (calendar.before(endCalendar)) {
+            Date result = calendar.getTime();
+            datesInRange.add(result);
+            calendar.add(java.util.Calendar.DATE, 1);
+        }
+        return datesInRange;
+    }
 
 }

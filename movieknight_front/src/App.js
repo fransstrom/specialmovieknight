@@ -16,8 +16,17 @@ class App extends Component {
         this.state = {
             adminState: false,
             movieList: [],
-            movieInfo: {}
+            movieInfo: {},
+            dates:[]
         }
+    }
+
+    componentDidMount(){
+            //triggar refreshtoken i backend
+    let url = 'http://localhost:6969/events';
+    axios.get(url).then(res=>{
+      this.setState({dates:res.data})
+    });
     }
 
     search = (query) => {
@@ -64,6 +73,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.dates)
         if (this.state.adminState) {
             return (
                 <div className="App">
@@ -103,7 +113,7 @@ class App extends Component {
                                       
                     </div>
                     <div>
-                    <Booking></Booking>
+                    <Booking dates={this.state.dates}></Booking>
                     </div>
                     
                 </div>

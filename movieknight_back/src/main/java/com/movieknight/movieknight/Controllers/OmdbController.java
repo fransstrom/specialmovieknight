@@ -1,5 +1,6 @@
 package com.movieknight.movieknight.Controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -92,5 +93,15 @@ public class OmdbController {
             movieRepository.save(movie);
             return new ResponseEntity<>(id, HttpStatus.OK);
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/getAllMovies", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<MovieEntity>> movies() {
+        ArrayList<MovieEntity> movieEntities = (ArrayList<MovieEntity>) movieRepository.findAll();
+        if (movieEntities==null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else
+        return new ResponseEntity<>(movieEntities, HttpStatus.OK);
     }
 }

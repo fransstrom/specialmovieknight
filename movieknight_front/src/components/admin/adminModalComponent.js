@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Divider from "@material-ui/core/Divider/Divider";
-import '../components/css/modal.css';
+import '../css/modal.css';
 
 function getModalStyle() {
     const top = 50;

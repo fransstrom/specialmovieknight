@@ -73,7 +73,7 @@ public class OmdbController {
         if (results==null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            System.out.println(results.getTitle());
+            System.out.println(results.getActors());
             return new ResponseEntity<>(id, HttpStatus.OK);
         }
     }

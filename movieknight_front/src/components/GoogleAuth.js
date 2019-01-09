@@ -36,7 +36,9 @@ export default class GoogleAuth extends Component {
       
     //triggar refreshtoken i backend
     let url = 'http://localhost:6969/events';
-    axios.get(url);
+    axios.get(url).then(res=>{
+      console.log(res)
+    });
   }
 
   signInCallback = authResult => {

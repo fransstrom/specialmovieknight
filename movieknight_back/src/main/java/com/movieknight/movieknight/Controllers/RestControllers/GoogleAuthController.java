@@ -10,7 +10,6 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
-import com.movieknight.movieknight.Controllers.GoogleCalendarController;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
 import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
@@ -100,7 +99,6 @@ public class GoogleAuthController {
 
 // Get profile info from ID token
 
-
         GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
         Calendar calendar =
                 new Calendar.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
@@ -136,7 +134,7 @@ public class GoogleAuthController {
                 }
                 System.out.printf("%s (%s) -> (%s)\n", event.getSummary(), start, end);
             }
-            insertUnavailableDatesToDB(items);
+
         }
 
         GoogleIdToken idToken = tokenResponse.parseIdToken();
@@ -166,8 +164,7 @@ public class GoogleAuthController {
         user.setExpires(formatter.format(ts));
 
         userRepository.save(user);
-        insertUnavailableDatesToDB(items);
-        insertBusyDateTimeToCommonCalendar(calendar);
+        //insertUnavailableDatesToDB(items);
     }
 
 
@@ -198,7 +195,7 @@ public class GoogleAuthController {
     }
 
 
-    private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
+/*    private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
         for (Event item : items) {
             UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
 
@@ -226,9 +223,9 @@ public class GoogleAuthController {
             }
         }
 
-    }
+    }*/
 
-    private void insertBusyDateTimeToCommonCalendar(Calendar calendar) throws IOException {
+/*    private void insertBusyDateTimeToCommonCalendar(Calendar calendar) throws IOException {
         //insert dates into common calendar
         Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
         for (UnavailableDateTime date : unavalibleDates) {
@@ -254,6 +251,8 @@ public class GoogleAuthController {
                 System.err.println("From insert to common calendar: " + e.getMessage());
             }
         }
-    }
+    }*/
 
 }
+
+

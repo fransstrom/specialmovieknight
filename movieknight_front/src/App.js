@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import './components/adminGridComponent';
-import './components/adminCardComponent';
+import './components/admin/adminGridComponent';
+import './components/admin/adminCardComponent';
 import axios from 'axios';
 
-import CenteredGrid from "./components/adminGridComponent";
-import PrimarySearchAppBar from "./components/adminNavbarComponent";
-import ClientSearchAppBar from "./components/clientNavbarComponent";
+import CenteredGrid from "./components/admin/adminGridComponent";
+import ClientCenteredGrid from "./components/client/clientGridComponent";
+import PrimarySearchAppBar from "./components/admin/adminNavbarComponent";
+import ClientSearchAppBar from "./components/client/clientNavbarComponent";
 import Booking from './components/bookingComponent'
-
+//Kevin is genius
 class App extends Component {
 
     constructor(props){
@@ -17,8 +18,11 @@ class App extends Component {
             adminState: false,
             movieList: [],
             movieInfo: {},
+            moviesFromDatabase: [],
             dates:[]
         }
+        console.log("Constructor")
+        this.getAllMoviesFromDatabase();
     }
 
     componentDidMount(){
@@ -27,6 +31,11 @@ class App extends Component {
     axios.get(url).then(res=>{
       this.setState({dates:res.data})
     });
+    }
+
+    handleAdminState = () => {
+    this.setState({adminState: !this.state.adminState});
+    this.getAllMoviesFromDatabase();
     }
 
     search = (query) => {
@@ -49,6 +58,16 @@ class App extends Component {
             .then(res => {
                 const movieInfo = res.data;
                 this.setState({movieInfo: movieInfo});
+            });
+    }
+
+    getAllMoviesFromDatabase = () =>{
+        let url="http://localhost:6969/getAllMovies";
+        axios.get(url)
+            .then(res => {
+                const allmovies = res.data;
+                console.log(allmovies);
+                this.setState({moviesFromDatabase: allmovies});
             });
     }
 
@@ -77,7 +96,7 @@ class App extends Component {
         if (this.state.adminState) {
             return (
                 <div className="App">
-                    <button onClick={()=> {this.setState({adminState: false})}}>Click</button>
+                    <button onClick={()=> {this.handleAdminState()}}>Click</button>
                     <header className="App-header">
                         MovieNight Admin Page
                         {this.props.movieSearch}
@@ -97,7 +116,7 @@ class App extends Component {
         else if (!this.state.adminState) {
             return (
                 <div className="App">
-                    <button onClick={()=> {this.setState({adminState: true})}}>Click</button>
+                    <button onClick={()=> {this.handleAdminState()}}>Click</button>
                     <header className="App-header-client">
                         MovieNight
                         {this.props.movieSearch}
@@ -106,11 +125,9 @@ class App extends Component {
                         <ClientSearchAppBar searchMovie={this.search.bind(this)}/>
                     </nav>
                     <div className="App-body">
-                        <CenteredGrid movieListFromAPI={this.state.movieList} movieInfoFromAPI={this.state.movieInfo}
-                                      getMovieInfo={this.getMovieInfo.bind(this)}
-                                      addToDataBase={this.addToDataBase.bind(this)}/>
-
-                                      
+                        <ClientCenteredGrid allMoviesFromDatabase={this.state.moviesFromDatabase}
+                                      getAllMoviesFromDatabase={this.getAllMoviesFromDatabase.bind(this)}
+                                      />
                     </div>
                     <div>
                     <Booking dates={this.state.dates}></Booking>

@@ -7,7 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import './css/navbar.css';
+import '../css/navbar.css';
 //import GoogleAuth from './GoogleAuth';
 
 const styles = theme => ({

@@ -21,6 +21,7 @@ class App extends Component {
             moviesFromDatabase: [],
             dates:[]
         }
+        console.log("Constructor")
         this.getAllMoviesFromDatabase();
     }
 
@@ -30,6 +31,11 @@ class App extends Component {
     axios.get(url).then(res=>{
       this.setState({dates:res.data})
     });
+    }
+
+    handleAdminState = () => {
+    this.setState({adminState: !this.state.adminState});
+    this.getAllMoviesFromDatabase();
     }
 
     search = (query) => {
@@ -90,7 +96,7 @@ class App extends Component {
         if (this.state.adminState) {
             return (
                 <div className="App">
-                    <button onClick={()=> {this.setState({adminState: false})}}>Click</button>
+                    <button onClick={()=> {this.handleAdminState()}}>Click</button>
                     <header className="App-header">
                         MovieNight Admin Page
                         {this.props.movieSearch}
@@ -110,7 +116,7 @@ class App extends Component {
         else if (!this.state.adminState) {
             return (
                 <div className="App">
-                    <button onClick={()=> {this.setState({adminState: true})}}>Click</button>
+                    <button onClick={()=> {this.handleAdminState()}}>Click</button>
                     <header className="App-header-client">
                         MovieNight
                         {this.props.movieSearch}
@@ -122,8 +128,6 @@ class App extends Component {
                         <ClientCenteredGrid allMoviesFromDatabase={this.state.moviesFromDatabase}
                                       getAllMoviesFromDatabase={this.getAllMoviesFromDatabase.bind(this)}
                                       />
-
-
                     </div>
                     <div>
                     <Booking dates={this.state.dates}></Booking>

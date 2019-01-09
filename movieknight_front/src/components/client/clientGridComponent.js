@@ -20,7 +20,6 @@ const styles = theme => ({
 
 function ClientCenteredGrid(props) {
     const { classes, allMoviesFromDatabase, getAllMoviesFromDatabase } = props;
-    getAllMoviesFromDatabase();
     return (
 
         <div className={classes.root}>

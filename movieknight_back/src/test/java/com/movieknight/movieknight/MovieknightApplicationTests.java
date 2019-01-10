@@ -11,6 +11,9 @@ public class MovieknightApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		int lol=003;
+		long lol2=003;
+		System.out.println(lol);
 	}
 
 }

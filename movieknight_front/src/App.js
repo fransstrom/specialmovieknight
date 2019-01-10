@@ -23,8 +23,6 @@ class App extends Component {
     };
     console.log('Constructor');
     this.getAllMoviesFromDatabase();
-
-
   }
 
   componentDidMount() {
@@ -98,18 +96,20 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.dates);    
-    var meetings=[]
-    this.state.dates.map((e, index)=>{
-        var startTime=e.startDate.slice(11,19)
-        var endDate=e.endDate.slice(11,19)
-        var index=index;
-       meetings.push(new meeting("meeting"+index+"",startTime,endDate))
-    })
+    console.log(this.state.dates);
+    var meetings = [];
+    this.state.dates.map((e, index) => {
+      var startTime = e.startDate.slice(11, 19);
+      var endTime = e.endDate.slice(11, 19);
+      var date=e.startDate.slice(0,10)
+      var index = index;
+      
+      console.log(new meeting('meeting' + index + '', startTime, endTime,date));
+      meetings.push(new meeting('meeting' + index + '', startTime, endTime,date));
+    });
 
-
-      meetings = meetings.getFreeTime();
-      console.log(meetings)
+    meetings = meetings.getFreeTime();
+    console.log(meetings);
 
     if (this.state.adminState) {
       return (

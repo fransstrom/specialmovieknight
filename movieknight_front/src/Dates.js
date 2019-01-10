@@ -10,7 +10,7 @@ meeting.prototype.convert = function (a) {
     var b = this[a + '_time'];
     var start = b.slice(0, 3);
     var min = parseInt(b.slice(3, 5));
-    min = a == "start" ? min - 1 : min + 1;
+    // min = a == "start" ? min - 1 : min + 1;
     min = min < 10 ? "0" + min : min;
     var ending = b.slice(5, 8);
 

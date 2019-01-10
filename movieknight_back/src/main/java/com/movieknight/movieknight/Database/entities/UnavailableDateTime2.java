@@ -3,33 +3,33 @@ package com.movieknight.movieknight.Database.entities;
 import com.google.api.client.util.DateTime;
 
 public class UnavailableDateTime2 {
-    String start;
-    String end;
+    String startDate;
+    String endDate;
 
-    public UnavailableDateTime2(String start, String end) {
-        this.start = start;
-        this.end = end;
+    public UnavailableDateTime2(String startDate, String endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public UnavailableDateTime2() {
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
 
-    public String getStart() {
-        return start;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getEnd() {
-        return end;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

@@ -101,11 +101,15 @@ class App extends Component {
     this.state.dates.map((e, index) => {
       var startTime = e.startDate.slice(11, 19);
       var endTime = e.endDate.slice(11, 19);
+
+      
+
       var date=e.startDate.slice(0,10)
       var index = index;
+      console.log(startTime + " - " + endTime+ "  "+date)
       
-      console.log(new meeting('meeting' + index + '', startTime, endTime,date));
-      meetings.push(new meeting('meeting' + index + '', startTime, endTime,date));
+      console.log(new meeting('meeting' + index + '', startTime, endTime, date));
+      meetings.push(new meeting('meeting' + index + '', startTime, endTime, date));
     });
 
     meetings = meetings.getFreeTime();

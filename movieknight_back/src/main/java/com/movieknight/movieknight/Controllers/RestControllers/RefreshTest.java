@@ -104,7 +104,7 @@ public class RefreshTest {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    public ResponseEntity<List<UnavailableDatesTest>> restGetEvents() {
+    public ResponseEntity<List<UnavailableDateTime2>> restGetEvents() {
         String refreshToken;
         Iterable<User> userList = userRepository.findAll();
         GoogleCredential credential;
@@ -113,7 +113,7 @@ public class RefreshTest {
         Calendar calendar;
         List<Event> items;
 
-        List<UnavailableDatesTest> unavailableDates = new ArrayList<>();
+        List<UnavailableDateTime2> unavailableDates = new ArrayList<>();
         List<Date> available = new ArrayList<>();
         for (User user : userList) {
 
@@ -134,46 +134,56 @@ public class RefreshTest {
                 calendar = getCalendar(credential);
                 items = getEvents(calendar);
 
-                UnavailableDatesTest datesTest;
+                UnavailableDateTime2 datesTest;
 
                 for (int i = 0, itemsSize = items.size(); i < itemsSize; i++) {
+                    datesTest = new UnavailableDateTime2();
                     Event event = items.get(i);
-                    DateTime start = firstNonNull(event.getStart().getDateTime(), event.getStart().getDate());
-                    DateTime end = firstNonNull(event.getEnd().getDateTime(), event.getStart().getDate());
+                    DateTime start = event.getStart().getDateTime();
+                    DateTime end = event.getEnd().getDateTime();
                     //   System.out.printf("%s %s (%s) - (%s)\n", "REGRESCHTEST", event.getSummary(), start, end);
+                    if (start == null || end == null) {
+                        System.out.println("title: " + event.getSummary());                   // unavailableDateTime.setStartDateTime();
+                        System.out.println("Start: " + start);
+                        System.out.println("startTIME = " + event.getStart().getDate().toString() + "T00:00:00.000+01:00" + " endTime = " + event.getEnd().getDate().toString());
+                        System.out.println("End: " + end);
+                        start = new DateTime(event.getStart().getDate().toString() + "T00:00:00.000+01:00");
+                        end = new DateTime(event.getEnd().getDate().toString() + "T00:00:00.000+01:00");
+                        datesTest.setStartDate(start.toString());
+                        datesTest.setEndDate(end.toString());
+                        unavailableDates.add(datesTest);
 
-                    eventsToReturn.add(event);
-                    datesTest = new UnavailableDatesTest();
-                    datesTest.setEndDate(new Date(end.getValue()));
-                    datesTest.setStartDate(new Date(start.getValue()));
-                    unavailableDates.add(datesTest);
+                    } else {
+                        System.out.println("invalid refreshtoken for use with userID: " + user.getId());
+                        System.out.println("Start: " + start);
+                        System.out.println("End: " + end);
+                        eventsToReturn.add(event);
+
+                        datesTest.setEndDate(end.toString());
+                        datesTest.setStartDate(start.toString());
+                        unavailableDates.add(datesTest);
+                    }
 
                 }
-            } else {
-                System.out.println("invalid refreshtoken for use with userID: " + user.getId());
+
+                Long newExpiresAt = System.currentTimeMillis() / 1000 + 3600; // timestamp in seconds
+
+
             }
 
+            if (eventsToReturn == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        }
+            return new ResponseEntity<>(unavailableDates, HttpStatus.OK);
+        }
 
-            Long newExpiresAt = System.currentTimeMillis() / 1000 + 3600; // timestamp in seconds
 
+        @RequestMapping(value = "/users", method = RequestMethod.GET)
+        public void listUsers () {
 
 
         }
 
-        if (eventsToReturn == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(unavailableDates, HttpStatus.OK);
-    }
-
-
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public void listUsers() {
-
 
     }
-
-
-
-}

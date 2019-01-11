@@ -8,17 +8,17 @@ export default class bookingComponent extends Component {
   componentDidMount() {}
 
   render() {
-    console.log(this.props.dates);
-    let unavailableDates = this.props.dates.map((e, index) => {
+    console.log(this.props);
+    let unavailableDates = this.props.freeTimes.map((e, index) => {
       return (
         <li key={index}>
-          {e.start + ' '}-{' ' + e.end}
+        {e.date + ': '}  {e.start_time + ' '}-{' ' + e.end_time}
         </li>
       );
     });
     return (
       <div>
-        <p>booking</p>
+        <p>Available time to book</p>
         <ul>{unavailableDates}</ul>
       </div>
     );

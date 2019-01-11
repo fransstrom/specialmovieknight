@@ -19,7 +19,7 @@ class App extends Component {
       movieList: [],
       movieInfo: {},
       moviesFromDatabase: [],
-      dates: []
+      unAvailableDateTimes: []
     };
     console.log('Constructor');
     this.getAllMoviesFromDatabase();
@@ -29,7 +29,7 @@ class App extends Component {
     //triggar refreshtoken i backend
     let url = 'http://localhost:6969/events';
     axios.get(url).then(res => {
-      this.setState({ dates: res.data });
+      this.setState({ unAvailableDateTimes: res.data });
     });
   }
 
@@ -96,24 +96,35 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.dates);
+    console.log(this.state.unAvailableDateTimes);
     var meetings = [];
-    this.state.dates.map((e, index) => {
+    this.state.unAvailableDateTimes.map((e, index) => {
       var startTime = e.startDate.slice(11, 19);
       var endTime = e.endDate.slice(11, 19);
-
-      
-
-      var date=e.startDate.slice(0,10)
+      var date = e.startDate.slice(0, 10);
       var index = index;
-      console.log(startTime + " - " + endTime+ "  "+date)
-      
-      console.log(new meeting('meeting' + index + '', startTime, endTime, date));
-      meetings.push(new meeting('meeting' + index + '', startTime, endTime, date));
+      console.log(startTime + ' - ' + endTime + '  ' + date);
+      meetings.push(
+        new meeting('meeting' + index + '', startTime, endTime, date)
+      );
     });
-
     meetings = meetings.getFreeTime();
-    console.log(meetings);
+
+
+     var freemeetings = [];
+     for(var i=0;i<meetings.length;i++){
+       if(meetings[i].meeting=='freetime'){
+         freemeetings.push(meetings[i])
+       }
+     }
+
+
+    freemeetings.sort(function(a, b) {
+      var day = a.date.slice(5, 7) - b.date.slice(5, 7);
+      var month = a.date.slice(8, 10) - b.date.slice(8, 10);
+      return day || month;
+    });
+    console.log(freemeetings);
 
     if (this.state.adminState) {
       return (
@@ -166,7 +177,7 @@ class App extends Component {
             />
           </div>
           <div>
-            <Booking dates={this.state.dates} />
+            <Booking freeTimes={freemeetings} />
           </div>
         </div>
       );

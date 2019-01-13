@@ -93,13 +93,21 @@ public class GoogleAuthController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String userId = payload.getSubject();  // Use this value as a key to identify a user.
 
-        User user = new User();
-        user.setRefreshToken(refreshToken);
-        user.setAccessToken(accessToken);
-        user.setId(userId);
-        user.setExpires(formatter.format(ts));
 
-        userRepository.save(user);
+
+
+        if(userRepository.findById(userId)==null){
+            User user = new User();
+            user.setRefreshToken(refreshToken);
+            user.setAccessToken(accessToken);
+            user.setId(userId);
+            user.setExpires(formatter.format(ts));
+            userRepository.save(user);
+        }else{
+            System.out.println("user has already signed up");
+        }
+
+
     }
 
 

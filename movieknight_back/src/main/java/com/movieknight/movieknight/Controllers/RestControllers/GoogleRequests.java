@@ -42,7 +42,7 @@ public class GoogleRequests {
         String refreshToken;
         String accessToken;
         GoogleCredential credential;
-        String newAccessToken = null;
+        String newAccessToken;
         List<Event> eventsToReturn = new ArrayList<>();
         Calendar calendar;
         List<Event> items;
@@ -51,8 +51,6 @@ public class GoogleRequests {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         for (User user : userList) {
-
-
             Date now = new Date(System.currentTimeMillis());
             Date expire = formatter.parse(user.getExpires());
             System.out.println("EXPIRES " + expire);

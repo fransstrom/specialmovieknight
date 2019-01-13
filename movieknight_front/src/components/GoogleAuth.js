@@ -40,7 +40,7 @@ export default class GoogleAuth extends Component {
       // Send the code to the server
       window.$.ajax({
         type: 'POST',
-        url: 'http://localhost:6969/google',
+        url: 'http://localhost:6969/authorize',
         // Always include an `X-Requested-With` header in every AJAX request,
         // to protect against CSRF attacks.
         headers: {

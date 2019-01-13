@@ -110,14 +110,12 @@ class App extends Component {
     });
     meetings = meetings.getFreeTime();
 
-
-     var freemeetings = [];
-     for(var i=0;i<meetings.length;i++){
-       if(meetings[i].meeting=='freetime'){
-         freemeetings.push(meetings[i])
-       }
-     }
-
+    var freemeetings = [];
+    for (var i = 0; i < meetings.length; i++) {
+      if (meetings[i].meeting == 'freetime') {
+        freemeetings.push(meetings[i]);
+      }
+    }
 
     freemeetings.sort(function(a, b) {
       var day = a.date.slice(5, 7) - b.date.slice(5, 7);
@@ -179,6 +177,7 @@ class App extends Component {
           <div>
             <Booking freeTimes={freemeetings} />
           </div>
+
         </div>
       );
     }

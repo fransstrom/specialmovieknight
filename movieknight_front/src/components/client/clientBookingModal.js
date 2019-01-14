@@ -6,7 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Divider from "@material-ui/core/Divider/Divider";
 import '../css/modal.css';
-
+import axios from 'axios';
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -52,7 +52,28 @@ class ClientBookingModalClass extends React.Component {
     };
 
     handleBooking = (eStart, eEnd, title, id) => {
-        console.log(eStart, eEnd, title, id)
+        var booking={
+            startDate:eStart,
+            endDate:eEnd,
+            movieTitle:title,
+            movieId:id
+        }
+
+       
+
+
+        axios.post(`http://localhost:6969/booking`, {
+            startDate:eStart,
+            endDate:eEnd,
+            movieTitle:title,
+            movieId:id
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 
     render() {
@@ -67,7 +88,7 @@ class ClientBookingModalClass extends React.Component {
             var sDate = new Date(e.startMillis).toString().slice(0, 25);
             var eDate = new Date(e.endMillis).toString().slice(15, 25);
             return (
-                <li value={e} onClick={() => this.handleBooking(e.startMillis, e.endMillis, item.title, item.id)} key={sDate + '' + eDate}>
+                <li className="bookingListItem" value={e} onClick={() => this.handleBooking(e.startMillis, e.endMillis, item.title, item.id)} key={sDate + '' + eDate}>
                     {sDate + ' - '}
                     {eDate}{' '}
                 </li>

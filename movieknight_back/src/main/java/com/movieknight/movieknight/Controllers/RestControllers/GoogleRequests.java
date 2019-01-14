@@ -1,15 +1,19 @@
 package com.movieknight.movieknight.Controllers.RestControllers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.api.client.googleapis.auth.oauth2.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.CalendarClasses.DateTimeInterval;
+import com.movieknight.movieknight.Database.entities.Booking;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import com.movieknight.movieknight.Database.entities.User;
+import com.movieknight.movieknight.Database.repositories.BookingRepository;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +29,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Long.parseLong;
+
 @RestController
 public class GoogleRequests {
 
+
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    BookingRepository bookingRepository;
+
     private final String CLIENT_ID = "892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com";
     private final String CLIENT_SECRET = "1VC8GEWAqWJ_WDR5cz71wt54";
 
@@ -40,36 +50,36 @@ public class GoogleRequests {
     public ResponseEntity<List<Interval>> restGetEvents() throws ParseException {
         Iterable<User> userList = userRepository.findAll();
 
-        String refreshToken;
-        String accessToken;
-        GoogleCredential credential;
-        String newAccessToken;
-        List<Event> eventsToReturn = new ArrayList<>();
-        Calendar calendar;
-        List<Event> items;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        List<Interval> availablaBookings = null;
+            String refreshToken;
+            String accessToken;
+            GoogleCredential credential;
+            String newAccessToken;
+            List<Event> eventsToReturn = new ArrayList<>();
+            Calendar calendar;
+            List<Event> items;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            List<Interval> availablaBookings = null;
 
-        for (User user : userList) {
-            Date now = new Date(System.currentTimeMillis());
-            Date expire = formatter.parse(user.getExpires());
-            System.out.println("EXPIRES " + expire);
-            refreshToken = user.getRefreshToken();
-            accessToken = user.getAccessToken();
+            for (User user : userList) {
+                Date now = new Date(System.currentTimeMillis());
+                Date expire = formatter.parse(user.getExpires());
+                System.out.println("EXPIRES " + expire);
+                refreshToken = user.getRefreshToken();
+                accessToken = user.getAccessToken();
 
-            if (expire.before(now)) {
-                credential = getRefreshedCredentials(refreshToken);
-                //new Expire DateTime
-                Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
-                Timestamp ts = new Timestamp(expires.getTime());
-                //new accessToken
-                newAccessToken = credential.getAccessToken();
-                user.setExpires(formatter.format(ts));
-                user.setAccessToken(newAccessToken);
-                userRepository.save(user);
-            } else {
-                credential = new GoogleCredential().setAccessToken(accessToken);
-            }
+                if (expire.before(now)) {
+                    credential = getRefreshedCredentials(refreshToken);
+                    //new Expire DateTime
+                    Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
+                    Timestamp ts = new Timestamp(expires.getTime());
+                    //new accessToken
+                    newAccessToken = credential.getAccessToken();
+                    user.setExpires(formatter.format(ts));
+                    user.setAccessToken(newAccessToken);
+                    userRepository.save(user);
+                } else {
+                    credential = new GoogleCredential().setAccessToken(accessToken);
+                }
 
 
             if (credential != null) {
@@ -110,6 +120,75 @@ public class GoogleRequests {
             }
         }
         return new ResponseEntity<>(availablaBookings, HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping(value = "/booking") @JsonProperty(value = "booking")
+    public void handleBooking(@RequestBody Booking booking) throws IOException, ParseException {
+        Iterable<User> userList = userRepository.findAll();
+
+        String refreshToken;
+        String accessToken;
+        GoogleCredential credential;
+        String newAccessToken;
+        List<Event> eventsToReturn = new ArrayList<>();
+        Calendar calendar;
+        List<Event> items;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        bookingRepository.save(booking);
+
+
+        for (User user : userList) {
+            Date now = new Date(System.currentTimeMillis());
+            Date expire = formatter.parse(user.getExpires());
+            System.out.println("EXPIRES " + expire);
+            refreshToken = user.getRefreshToken();
+            accessToken = user.getAccessToken();
+
+            if (expire.before(now)) {
+                credential = getRefreshedCredentials(refreshToken);
+                //new Expire DateTime
+                Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
+                Timestamp ts = new Timestamp(expires.getTime());
+                //new accessToken
+                newAccessToken = credential.getAccessToken();
+                user.setExpires(formatter.format(ts));
+                user.setAccessToken(newAccessToken);
+                userRepository.save(user);
+            } else {
+                credential = new GoogleCredential().setAccessToken(accessToken);
+            }
+
+
+            if (credential != null) {
+                calendar = getCalendar(credential);
+
+                Event event = new Event()
+                        .setSummary("Watching "+booking.getMovieTitle())
+                        .setLocation("MovieKnight")
+                        .setDescription("");
+
+                DateTime startDateTime = new DateTime(parseLong(booking.getStartDate()));
+                EventDateTime start = new EventDateTime()
+                        .setDateTime(startDateTime)
+                        .setTimeZone("CET");
+                event.setStart(start);
+
+                DateTime endDateTime = new DateTime(parseLong(booking.getEndDate()));
+                EventDateTime end = new EventDateTime()
+                        .setDateTime(endDateTime)
+                        .setTimeZone("CET");
+                event.setEnd(end);
+                String calendarId = "primary";
+
+
+                event = calendar.events().insert(calendarId, event).execute();
+                System.out.printf("Event created: %s\n", event.getHtmlLink());
+            }
+        }
+        System.out.println(booking.getMovieTitle());
     }
 
     private GoogleCredential getRefreshedCredentials(String refreshCode) {

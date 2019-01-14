@@ -182,6 +182,8 @@ public class GoogleRequests {
                 event.setEnd(end);
                 String calendarId = "primary";
 
+                System.out.println(booking.getId().toString());
+                event.setId(booking.getId().toString());
 
                 event = calendar.events().insert(calendarId, event).execute();
                 System.out.printf("Event created: %s\n", event.getHtmlLink());
@@ -189,6 +191,27 @@ public class GoogleRequests {
         }
         System.out.println(booking.getMovieTitle());
     }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/bookings", method = RequestMethod.GET)
+    public ResponseEntity<List<Booking>> restGetBookings() throws ParseException {
+    Iterable<Booking> bookingsRepo= bookingRepository.findAll();
+    List<Booking> bookings= new ArrayList<>();
+
+    bookingsRepo.forEach(e->{
+        bookings.add(e);
+    });
+
+    
+    return new ResponseEntity<>(bookings,HttpStatus.OK);
+    }
+
+
+
+
+
+
 
     private GoogleCredential getRefreshedCredentials(String refreshCode) {
         try {

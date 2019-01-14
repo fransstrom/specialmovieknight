@@ -1,30 +1,38 @@
 package com.movieknight.movieknight.Database.entities;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.io.Serializable;
+
 
 @Entity
-@Table(
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"startDate", "endDate"}))
+public class Booking  {
 
-        uniqueConstraints =
-        @UniqueConstraint(columnNames = {"startDate", "endDate"})
-)
-public class Booking {
-    int Id;
+
+    String Id;
+
     String startDate;
     String endDate;
     String movieTitle;
     String movieId;
 
+
+
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
+
 
     public String getStartDate() {
         return startDate;

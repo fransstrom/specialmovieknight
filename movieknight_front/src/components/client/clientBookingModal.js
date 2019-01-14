@@ -7,6 +7,10 @@ import Button from '@material-ui/core/Button';
 import Divider from "@material-ui/core/Divider/Divider";
 import '../css/modal.css';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { toast } from 'react-toastify';
+
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -52,7 +56,7 @@ class ClientBookingModalClass extends React.Component {
     };
 
     handleBooking = (eStart, eEnd, title, id) => {
-    
+        this.handleClose();
         axios.post(`http://localhost:6969/booking`, {
             startDate:eStart,
             endDate:eEnd,
@@ -65,6 +69,15 @@ class ClientBookingModalClass extends React.Component {
           .catch(function (error) {
             console.log(error);
           });
+        toast.success('🍿 Movie Added 🥤', {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
+
     }
 
     render() {
@@ -108,7 +121,17 @@ class ClientBookingModalClass extends React.Component {
                         </Typography>
                     </div>
                 </Modal>
-            </div>
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                />            </div>
         );
     }
 }

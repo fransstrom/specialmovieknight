@@ -9,6 +9,8 @@ import ClientCenteredGrid from './components/client/clientGridComponent';
 import PrimarySearchAppBar from './components/admin/adminNavbarComponent';
 import ClientSearchAppBar from './components/client/clientNavbarComponent';
 
+import BookingsComponent from './components/client/bookingsComponent'
+
 //Kevin is genius
 class App extends Component {
   constructor(props) {
@@ -18,7 +20,8 @@ class App extends Component {
       movieList: [],
       movieInfo: {},
       moviesFromDatabase: [],
-      availableBookingTimes: []
+      availableBookingTimes: [],
+      bookings:[]
     };
     console.log('Constructor');
     this.getAllMoviesFromDatabase();
@@ -30,8 +33,13 @@ class App extends Component {
     axios.get(url).then(res => {
       this.setState({ availableBookingTimes: res.data });
     });
-      console.log(this.state.availableBookingTimes);
-  }
+
+      axios.get('http://localhost:6969/bookings').then(res => {
+        this.setState({ bookings: res.data });
+      });
+        
+    }
+  
 
   handleAdminState = () => {
     this.setState({ adminState: !this.state.adminState });
@@ -96,7 +104,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.availableBookingTimes);
+    console.log(this.state.bookings);
     if (this.state.adminState) {
       return (
         <div className="App">
@@ -148,6 +156,9 @@ class App extends Component {
               )}
             />
           </div>
+          <div>
+            <h2>Bookings</h2>
+            <BookingsComponent bookings={this.state.bookings}/></div>
         </div>
       );
     }

@@ -8,12 +8,12 @@ import org.joda.time.Interval;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DateTimeIntervalWeek {
+public class DateTimeInterval {
 
     List<Interval> bookingIntervals = new ArrayList<>();
     List<Interval> unavailableIntervals = new ArrayList<>();
 
-    public DateTimeIntervalWeek() {
+    public DateTimeInterval() {
         for (int i = 0; i < 10; i++) {
             DateTime dateTimeStart1 = new DateTime().plusDays(i).withTime(18, 0, 0, 0);
             DateTime dateTimeEnd1 = new DateTime().plusDays(i).withTime(20, 0, 0, 0);

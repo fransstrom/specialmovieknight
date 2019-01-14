@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 class DateTimeIntervalWeekTest {
-    private DateTimeIntervalWeek dateTimeIntervalWeek=new DateTimeIntervalWeek();
+    private DateTimeInterval dateTimeIntervalWeek=new DateTimeInterval();
     private List<UnavailableDateTime2> unavailableDateTime2List=new ArrayList<>();
 
     @Test

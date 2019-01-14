@@ -7,8 +7,7 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
-import com.movieknight.movieknight.CalendarClasses.DateTimeIntervalWeek;
-import com.movieknight.movieknight.Database.UnavailableDatesTest;
+import com.movieknight.movieknight.CalendarClasses.DateTimeInterval;
 import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
@@ -20,12 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @RestController
@@ -36,7 +33,7 @@ public class GoogleRequests {
     private final String CLIENT_ID = "892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com";
     private final String CLIENT_SECRET = "1VC8GEWAqWJ_WDR5cz71wt54";
 
-    DateTimeIntervalWeek dateTimeIntervalWeek = new DateTimeIntervalWeek();
+    DateTimeInterval dateTimeInterval = new DateTimeInterval();
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/events", method = RequestMethod.GET)
@@ -90,20 +87,20 @@ public class GoogleRequests {
                         end = new DateTime(event.getEnd().getDate().toString() + "T00:00:00.000+01:00");
 
 
-                        dateTimeIntervalWeek.addToUnavailableIntervals(start.toString(), end.toString());
+                        dateTimeInterval.addToUnavailableIntervals(start.toString(), end.toString());
                     } else {
                         eventsToReturn.add(event);
 
 
-                        dateTimeIntervalWeek.addToUnavailableIntervals(start.toString(), end.toString());
+                        dateTimeInterval.addToUnavailableIntervals(start.toString(), end.toString());
                     }
 
                 }
 
                 Long newExpiresAt = System.currentTimeMillis() / 1000 + 3600; // timestamp in seconds
-                System.out.println(dateTimeIntervalWeek.getUnavailableIntervals());
-                System.out.println("DATETIMEINTERVALS VALID SIZE::!! " + dateTimeIntervalWeek.getValidInterVals().size());
-                availablaBookings = dateTimeIntervalWeek.getValidInterVals();
+                System.out.println(dateTimeInterval.getUnavailableIntervals());
+                System.out.println("DATETIMEINTERVALS VALID SIZE::!! " + dateTimeInterval.getValidInterVals().size());
+                availablaBookings = dateTimeInterval.getValidInterVals();
 
 
             }

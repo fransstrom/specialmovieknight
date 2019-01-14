@@ -64,7 +64,6 @@ class ClientSimpleModal extends React.Component {
                     onClose={this.handleClose}
                 >
                     <div style={getModalStyle()} className={classes.paper}>
-
                         <Typography variant="h6" id="modal-title">
                             <span className={"bold"}>{item.title}</span>
                         </Typography>

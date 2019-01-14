@@ -52,16 +52,7 @@ class ClientBookingModalClass extends React.Component {
     };
 
     handleBooking = (eStart, eEnd, title, id) => {
-        var booking={
-            startDate:eStart,
-            endDate:eEnd,
-            movieTitle:title,
-            movieId:id
-        }
-
-       
-
-
+    
         axios.post(`http://localhost:6969/booking`, {
             startDate:eStart,
             endDate:eEnd,
@@ -88,7 +79,7 @@ class ClientBookingModalClass extends React.Component {
             var sDate = new Date(e.startMillis).toString().slice(0, 25);
             var eDate = new Date(e.endMillis).toString().slice(15, 25);
             return (
-                <li className="bookingListItem" value={e} onClick={() => this.handleBooking(e.startMillis, e.endMillis, item.title, item.id)} key={sDate + '' + eDate}>
+                <li key={sDate+eDate} className="bookingListItem" value={e} onClick={() => this.handleBooking(e.startMillis, e.endMillis, item.title, item.id)} >
                     {sDate + ' - '}
                     {eDate}{' '}
                 </li>

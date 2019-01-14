@@ -8,8 +8,6 @@ import CenteredGrid from './components/admin/adminGridComponent';
 import ClientCenteredGrid from './components/client/clientGridComponent';
 import PrimarySearchAppBar from './components/admin/adminNavbarComponent';
 import ClientSearchAppBar from './components/client/clientNavbarComponent';
-import Booking from './components/bookingComponent';
-import Dates, { meeting } from './Dates';
 
 //Kevin is genius
 class App extends Component {

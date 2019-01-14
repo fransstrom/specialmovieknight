@@ -50,36 +50,36 @@ public class GoogleRequests {
     public ResponseEntity<List<Interval>> restGetEvents() throws ParseException {
         Iterable<User> userList = userRepository.findAll();
 
-            String refreshToken;
-            String accessToken;
-            GoogleCredential credential;
-            String newAccessToken;
-            List<Event> eventsToReturn = new ArrayList<>();
-            Calendar calendar;
-            List<Event> items;
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            List<Interval> availablaBookings = null;
+        String refreshToken;
+        String accessToken;
+        GoogleCredential credential;
+        String newAccessToken;
+        List<Event> eventsToReturn = new ArrayList<>();
+        Calendar calendar;
+        List<Event> items;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Interval> availablaBookings = null;
 
-            for (User user : userList) {
-                Date now = new Date(System.currentTimeMillis());
-                Date expire = formatter.parse(user.getExpires());
-                System.out.println("EXPIRES " + expire);
-                refreshToken = user.getRefreshToken();
-                accessToken = user.getAccessToken();
+        for (User user : userList) {
+            Date now = new Date(System.currentTimeMillis());
+            Date expire = formatter.parse(user.getExpires());
+            System.out.println("EXPIRES " + expire);
+            refreshToken = user.getRefreshToken();
+            accessToken = user.getAccessToken();
 
-                if (expire.before(now)) {
-                    credential = getRefreshedCredentials(refreshToken);
-                    //new Expire DateTime
-                    Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
-                    Timestamp ts = new Timestamp(expires.getTime());
-                    //new accessToken
-                    newAccessToken = credential.getAccessToken();
-                    user.setExpires(formatter.format(ts));
-                    user.setAccessToken(newAccessToken);
-                    userRepository.save(user);
-                } else {
-                    credential = new GoogleCredential().setAccessToken(accessToken);
-                }
+            if (expire.before(now)) {
+                credential = getRefreshedCredentials(refreshToken);
+                //new Expire DateTime
+                Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
+                Timestamp ts = new Timestamp(expires.getTime());
+                //new accessToken
+                newAccessToken = credential.getAccessToken();
+                user.setExpires(formatter.format(ts));
+                user.setAccessToken(newAccessToken);
+                userRepository.save(user);
+            } else {
+                credential = new GoogleCredential().setAccessToken(accessToken);
+            }
 
 
             if (credential != null) {
@@ -115,7 +115,7 @@ public class GoogleRequests {
 
             }
 
-            if (eventsToReturn == null) {
+            if (eventsToReturn.size() < 1) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
         }
@@ -124,17 +124,16 @@ public class GoogleRequests {
 
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping(value = "/booking") @JsonProperty(value = "booking")
+    @PostMapping(value = "/booking")
+    @JsonProperty(value = "booking")
     public void handleBooking(@RequestBody Booking booking) throws IOException, ParseException {
         Iterable<User> userList = userRepository.findAll();
-
         String refreshToken;
         String accessToken;
         GoogleCredential credential;
         String newAccessToken;
-        List<Event> eventsToReturn = new ArrayList<>();
         Calendar calendar;
-        List<Event> items;
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         bookingRepository.save(booking);
@@ -166,7 +165,7 @@ public class GoogleRequests {
                 calendar = getCalendar(credential);
 
                 Event event = new Event()
-                        .setSummary("Watching "+booking.getMovieTitle())
+                        .setSummary("Watching " + booking.getMovieTitle())
                         .setLocation("MovieKnight")
                         .setDescription("");
 

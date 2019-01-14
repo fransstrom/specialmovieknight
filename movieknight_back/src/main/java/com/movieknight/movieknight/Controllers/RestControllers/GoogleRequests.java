@@ -17,9 +17,13 @@ import com.movieknight.movieknight.Database.repositories.BookingRepository;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -203,7 +207,6 @@ public class GoogleRequests {
         bookings.add(e);
     });
 
-    
     return new ResponseEntity<>(bookings,HttpStatus.OK);
     }
 
@@ -211,6 +214,52 @@ public class GoogleRequests {
 
 
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping(value = "/deletebooking")
+    @JsonProperty(value = "id")
+    public void deleteBooking(@RequestParam String id) throws IOException, ParseException {
+        System.out.println(id);
+        Booking book=bookingRepository.findById(id);
+        System.out.println(book.getMovieTitle());
+        bookingRepository.delete(book);
+        Iterable<User> userList = userRepository.findAll();
+        String refreshToken;
+        String accessToken;
+        GoogleCredential credential;
+        String newAccessToken;
+        Calendar calendar;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        for (User user : userList) {
+            Date now = new Date(System.currentTimeMillis());
+            Date expire = formatter.parse(user.getExpires());
+            System.out.println("EXPIRES " + expire);
+            refreshToken = user.getRefreshToken();
+            accessToken = user.getAccessToken();
+
+            if (expire.before(now)) {
+                credential = getRefreshedCredentials(refreshToken);
+                //new Expire DateTime
+                Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
+                Timestamp ts = new Timestamp(expires.getTime());
+                //new accessToken
+                newAccessToken = credential.getAccessToken();
+                user.setExpires(formatter.format(ts));
+                user.setAccessToken(newAccessToken);
+                userRepository.save(user);
+            } else {
+                credential = new GoogleCredential().setAccessToken(accessToken);
+            }
+
+
+            if (credential != null) {
+                calendar = getCalendar(credential);
+                calendar.events().delete("primary", id).execute();
+            }
+        }
+
+    }
 
 
     private GoogleCredential getRefreshedCredentials(String refreshCode) {

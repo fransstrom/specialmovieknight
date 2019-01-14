@@ -97,14 +97,22 @@ class App extends Component {
   }
 
   render() {
-  
-console.log(this.state.availableBookingTimes)
+    console.log(this.state.availableBookingTimes);
+    var freebookings = this.state.availableBookingTimes;
+    freebookings.sort((a, b) =>{
+      return a.startMillis - b.startMillis;
+    });
 
-    var freebookings=this.state.availableBookingTimes.map(e=>{
-      var sDate= new Date(e.startMillis).toString().slice(0,25);
-      var eDate= new Date(e.endMillis).toString().slice(15,25);
-      return(<li>{sDate+" - "}{eDate} </li>)
-    })
+    var freebookingsElem = freebookings.map(e => {
+      var sDate = new Date(e.startMillis).toString().slice(0, 25);
+      var eDate = new Date(e.endMillis).toString().slice(15, 25);
+      return (
+        <li key={sDate + '' + eDate}>
+          {sDate + ' - '}
+          {eDate}{' '}
+        </li>
+      );
+    });
 
     if (this.state.adminState) {
       return (
@@ -157,9 +165,8 @@ console.log(this.state.availableBookingTimes)
             />
           </div>
           <div>
-        {freebookings}
+            <ul>{freebookingsElem}</ul>
           </div>
-
         </div>
       );
     }

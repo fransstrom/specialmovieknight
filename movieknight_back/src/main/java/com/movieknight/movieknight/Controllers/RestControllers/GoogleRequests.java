@@ -8,7 +8,6 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 import com.movieknight.movieknight.CalendarClasses.DateTimeInterval;
-import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import com.movieknight.movieknight.Database.entities.User;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
 import org.joda.time.Interval;
@@ -75,7 +74,6 @@ public class GoogleRequests {
             if (credential != null) {
                 calendar = getCalendar(credential);
                 items = getEvents(calendar);
-                UnavailableDateTime2 datesTest;
 
                 for (int i = 0, itemsSize = items.size(); i < itemsSize; i++) {
 

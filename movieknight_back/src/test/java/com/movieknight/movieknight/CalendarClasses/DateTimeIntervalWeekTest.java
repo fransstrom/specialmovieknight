@@ -1,6 +1,5 @@
 package com.movieknight.movieknight.CalendarClasses;
 
-import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class DateTimeIntervalWeekTest {
     private DateTimeInterval dateTimeIntervalWeek=new DateTimeInterval();
-    private List<UnavailableDateTime2> unavailableDateTime2List=new ArrayList<>();
 
     @Test
     void setUp() {

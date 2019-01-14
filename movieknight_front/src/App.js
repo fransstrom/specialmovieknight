@@ -32,6 +32,8 @@ class App extends Component {
     axios.get(url).then(res => {
       this.setState({ availableBookingTimes: res.data });
     });
+ 
+ 
   }
 
   handleAdminState = () => {

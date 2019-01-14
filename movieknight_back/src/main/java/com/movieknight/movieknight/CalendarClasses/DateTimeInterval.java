@@ -1,7 +1,6 @@
 package com.movieknight.movieknight.CalendarClasses;
 
 
-import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
@@ -35,9 +34,7 @@ public class DateTimeInterval {
                   validInterval.remove(j);
               }
             }
-
         }
-
         return validInterval;
     }
 

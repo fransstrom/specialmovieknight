@@ -38,20 +38,14 @@ import java.util.List;
 
 @RestController
 public class GoogleAuthController {
-    private static com.google.api.services.calendar.Calendar client;
-
 
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    UnavalibleDateRepository unavalibleDateRepository;
 
-    @Value("${google.common-calendarId}")
-    private String commonCalendarId;
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping(value = "/google", method = RequestMethod.POST)
-    public void test(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) throws IOException {
+    @RequestMapping(value = "/authorize", method = RequestMethod.POST)
+    public void authorize(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) throws IOException {
         // (Receive authCode via HTTPS POST)
         if (encoding == null || encoding.isEmpty()) {
             // Without the `X-Requested-With` header, this request could be forged. Aborts.
@@ -82,6 +76,7 @@ public class GoogleAuthController {
                         // specify an empty string.
                         .execute();
 
+
         String accessToken = tokenResponse.getAccessToken();
         System.out.println("accessToken: " + accessToken);
         String refreshToken = tokenResponse.getRefreshToken();
@@ -89,172 +84,28 @@ public class GoogleAuthController {
         System.out.println("refreshToken: " + refreshToken);
         System.out.println("expiresAt: " + expiresAt);
 
-
-
-
-// Use access token to call API
-/*        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
-        Drive drive =
-                new Drive.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
-                        .setApplicationName("Auth Code Exchange Demo")
-                        .build();*/
-//        File file = drive.files().get("appfolder").execute();
-
-// Get profile info from ID token
-
-        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
-        Calendar calendar =
-                new Calendar.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
-                        .setApplicationName("Movie Nights")
-                        .build();
-
-        DateTime now = new DateTime(System.currentTimeMillis());
-        Events events = null;
-        try {
-            events = calendar.events().list("primary")
-                    .setMaxResults(10)
-                    .setTimeMin(now)
-                    .setOrderBy("startTime")
-                    .setSingleEvents(true)
-                    .execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<Event> items = events.getItems();
-        if (items.isEmpty()) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events");
-            for (Event event : items) {
-                DateTime start = event.getStart().getDateTime();
-                if (start == null) { // If it's an all-day-event - store the date instead
-                    start = event.getStart().getDate();
-                }
-                DateTime end = event.getEnd().getDateTime();
-                if (end == null) { // If it's an all-day-event - store the date instead
-                    end = event.getStart().getDate();
-                }
-                System.out.printf("%s (%s) -> (%s)\n", event.getSummary(), start, end);
-            }
-
-        }
-
         GoogleIdToken idToken = tokenResponse.parseIdToken();
         GoogleIdToken.Payload payload = idToken.getPayload();
-        System.out.println(payload);
-        String userId = payload.getSubject();  // Use this value as a key to identify a user.
-        String email = payload.getEmail();
-        boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-        String name = (String) payload.get("name");
-        String pictureUrl = (String) payload.get("picture");
-        String locale = (String) payload.get("locale");
-        String familyName = (String) payload.get("family_name");
-        String givenName = (String) payload.get("given_name");
-/*        System.out.println(givenName + " " + familyName);
-        System.out.println();*/
 
         Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
         Timestamp ts = new Timestamp(expires.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(formatter.format(ts));
-        System.out.println("Expiresesese" + expires);
+        String userId = payload.getSubject();  // Use this value as a key to identify a user.
 
-        User user = new User();
-        user.setRefreshToken(refreshToken);
-        user.setAccessToken(accessToken);
-        user.setId(userId);
-        user.setExpires(formatter.format(ts));
-
-        userRepository.save(user);
-        //insertUnavailableDatesToDB(items);
-    }
-
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping(value = "/getdates", method = RequestMethod.GET)
-    public ResponseEntity<ArrayList<UnavailableDateTime>> dates() throws ParseException {
-        ArrayList<UnavailableDateTime> dbDates = (ArrayList<UnavailableDateTime>) unavalibleDateRepository.findAll();
-        ArrayList<UnavailableDateTime> dates = new ArrayList<>();
-        String startDateTime;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-
-        for (int i = 0; i < dbDates.size(); i++) {
-            startDateTime = dbDates.get(i).getStartDateTime().substring(0, 16);
-            if (simpleDateFormat.parse(startDateTime).before(new Date())) {
-                System.out.println("Date has passed");
-            } else {
-                System.out.println("Future date");
-                dates.add(dbDates.get(i));
-            }
+        if(userRepository.findById(userId)==null){
+            User user = new User();
+            user.setRefreshToken(refreshToken);
+            user.setAccessToken(accessToken);
+            user.setId(userId);
+            user.setExpires(formatter.format(ts));
+            userRepository.save(user);
+        }else{
+            System.out.println("user has already signed up");
         }
 
-        if (dates.size() <= 0) {
-            return new ResponseEntity<>(dates, HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(dates, HttpStatus.OK);
-        }
 
     }
 
-
-/*    private void insertUnavailableDatesToDB(List<Event> items) throws IOException {
-        for (Event item : items) {
-            UnavailableDateTime unavailableDateTime = new UnavailableDateTime();
-
-
-            DateTime startDateTime = item.getStart().getDateTime();
-            DateTime endDateTime = item.getEnd().getDateTime();
-            if (startDateTime == null || endDateTime == null) {
-               // unavailableDateTime.setStartDateTime();
-                System.out.println("startTIME = "+ item.getStart().getDate().toString()+"T00:00:00.000+01:00"+" endTime = "+item.getEnd().getDate().toString() );
-                startDateTime=new DateTime(item.getStart().getDate().toString()+"T00:00:00.000+01:00");
-                endDateTime=new DateTime(item.getEnd().getDate().toString()+"T00:00:00.000+01:00");
-            }
-
-            unavailableDateTime.setStartDateTime(startDateTime.toString());
-            System.out.println("title: " + item.getSummary());
-            System.out.println("Start: " + startDateTime);
-            System.out.println("End: " + endDateTime);
-            unavailableDateTime.setEndDateTime(endDateTime.toString());
-            unavailableDateTime.setId(item.getId());
-
-            try {
-                unavalibleDateRepository.save(unavailableDateTime);
-            } catch (Exception ignored) {
-
-            }
-        }
-
-    }*/
-
-/*    private void insertBusyDateTimeToCommonCalendar(Calendar calendar) throws IOException {
-        //insert dates into common calendar
-        Iterable<UnavailableDateTime> unavalibleDates = unavalibleDateRepository.findAll();
-        for (UnavailableDateTime date : unavalibleDates) {
-            try {
-                Event event = new Event()
-                        .setSummary("Busy");
-
-                EventDateTime start = new EventDateTime()
-                        .setDateTime(DateTime.parseRfc3339(date.getStartDateTime()))
-                        .setTimeZone("Europe/Stockholm");
-                event.setStart(start);
-
-                EventDateTime end = new EventDateTime()
-                        .setDateTime(DateTime.parseRfc3339(date.getEndDateTime()))
-                        .setTimeZone("Europe/Stockholm");
-                event.setEnd(end);
-                event.setColorId("3");
-                event.setId(date.getId());
-                event = calendar.events().insert(commonCalendarId, event).execute();
-
-                System.out.printf("Event created: %s\n", event.getHtmlLink());
-            } catch (Exception e) {
-                System.err.println("From insert to common calendar: " + e.getMessage());
-            }
-        }
-    }*/
 
 }
 

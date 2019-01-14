@@ -10,6 +10,7 @@ import PrimarySearchAppBar from './components/admin/adminNavbarComponent';
 import ClientSearchAppBar from './components/client/clientNavbarComponent';
 import Booking from './components/bookingComponent';
 import Dates, { meeting } from './Dates';
+
 //Kevin is genius
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends Component {
       movieList: [],
       movieInfo: {},
       moviesFromDatabase: [],
-      unAvailableDateTimes: []
+      availableBookingTimes: []
     };
     console.log('Constructor');
     this.getAllMoviesFromDatabase();
@@ -29,7 +30,7 @@ class App extends Component {
     //triggar refreshtoken i backend
     let url = 'http://localhost:6969/events';
     axios.get(url).then(res => {
-      this.setState({ unAvailableDateTimes: res.data });
+      this.setState({ availableBookingTimes: res.data });
     });
   }
 
@@ -96,35 +97,22 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.unAvailableDateTimes);
-    var meetings = [];
-    this.state.unAvailableDateTimes.map((e, index) => {
-      var startTime = e.startDate.slice(11, 19);
-      var endTime = e.endDate.slice(11, 19);
-      var date = e.startDate.slice(0, 10);
-      var index = index;
-      console.log(startTime + ' - ' + endTime + '  ' + date);
-      meetings.push(
-        new meeting('meeting' + index + '', startTime, endTime, date)
+    console.log(this.state.availableBookingTimes);
+    var freebookings = this.state.availableBookingTimes;
+    freebookings.sort((a, b) =>{
+      return a.startMillis - b.startMillis;
+    });
+
+    var freebookingsElem = freebookings.map(e => {
+      var sDate = new Date(e.startMillis).toString().slice(0, 25);
+      var eDate = new Date(e.endMillis).toString().slice(15, 25);
+      return (
+        <li key={sDate + '' + eDate}>
+          {sDate + ' - '}
+          {eDate}{' '}
+        </li>
       );
     });
-    meetings = meetings.getFreeTime();
-
-
-     var freemeetings = [];
-     for(var i=0;i<meetings.length;i++){
-       if(meetings[i].meeting=='freetime'){
-         freemeetings.push(meetings[i])
-       }
-     }
-
-
-    freemeetings.sort(function(a, b) {
-      var day = a.date.slice(5, 7) - b.date.slice(5, 7);
-      var month = a.date.slice(8, 10) - b.date.slice(8, 10);
-      return day || month;
-    });
-    console.log(freemeetings);
 
     if (this.state.adminState) {
       return (
@@ -177,7 +165,7 @@ class App extends Component {
             />
           </div>
           <div>
-            <Booking freeTimes={freemeetings} />
+            <ul>{freebookingsElem}</ul>
           </div>
         </div>
       );

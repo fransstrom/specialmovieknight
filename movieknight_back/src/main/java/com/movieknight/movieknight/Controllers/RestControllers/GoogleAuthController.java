@@ -87,14 +87,10 @@ public class GoogleAuthController {
         GoogleIdToken idToken = tokenResponse.parseIdToken();
         GoogleIdToken.Payload payload = idToken.getPayload();
 
-
         Date expires = new Date(System.currentTimeMillis() + 3600 * 1000);
         Timestamp ts = new Timestamp(expires.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String userId = payload.getSubject();  // Use this value as a key to identify a user.
-
-
-
 
         if(userRepository.findById(userId)==null){
             User user = new User();

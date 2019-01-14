@@ -32,6 +32,7 @@ class App extends Component {
     axios.get(url).then(res => {
       this.setState({ availableBookingTimes: res.data });
     });
+      console.log(this.state.availableBookingTimes);
   }
 
   handleAdminState = () => {
@@ -98,22 +99,6 @@ class App extends Component {
 
   render() {
     console.log(this.state.availableBookingTimes);
-    var freebookings = this.state.availableBookingTimes;
-    freebookings.sort((a, b) =>{
-      return a.startMillis - b.startMillis;
-    });
-
-    var freebookingsElem = freebookings.map(e => {
-      var sDate = new Date(e.startMillis).toString().slice(0, 25);
-      var eDate = new Date(e.endMillis).toString().slice(15, 25);
-      return (
-        <li key={sDate + '' + eDate}>
-          {sDate + ' - '}
-          {eDate}{' '}
-        </li>
-      );
-    });
-
     if (this.state.adminState) {
       return (
         <div className="App">
@@ -159,13 +144,11 @@ class App extends Component {
           <div className="App-body">
             <ClientCenteredGrid
               allMoviesFromDatabase={this.state.moviesFromDatabase}
+              bookingsElem={this.state.availableBookingTimes}
               getAllMoviesFromDatabase={this.getAllMoviesFromDatabase.bind(
                 this
               )}
             />
-          </div>
-          <div>
-            <ul>{freebookingsElem}</ul>
           </div>
         </div>
       );

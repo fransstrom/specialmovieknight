@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ClientSimpleModalWrapped from './clientModalComponent';
+import ClientBookingModal from './clientBookingModal';
 
 const styles = {
     card: {
@@ -21,7 +22,7 @@ const styles = {
 };
 
 function ClientImgMediaCard(props) {
-    const { classes, item } = props;
+    const { classes, item, bookingsElem } = props;
     return (
         <Card className={classes.card}>
             <CardActionArea>
@@ -45,9 +46,7 @@ function ClientImgMediaCard(props) {
             </CardActionArea>
             <CardActions>
                 <ClientSimpleModalWrapped  item={item} />
-                <Button onClick={() => {}} size="small" color="primary">
-                    Book Movie
-                </Button>
+                <ClientBookingModal bookingsElem={bookingsElem} item={item}/>
             </CardActions>
         </Card>
     );

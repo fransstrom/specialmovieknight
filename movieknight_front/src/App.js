@@ -32,6 +32,7 @@ class App extends Component {
     let url = 'http://localhost:6969/events';
     axios.get(url).then(res => {
       if (res.data) {
+        console.log(res.data)
         this.setState({ availableBookingTimes: res.data });
       }
     });
@@ -39,6 +40,7 @@ class App extends Component {
     axios.get('http://localhost:6969/bookings').then(res => {
       console.log(res)
       if (res.data) {
+        console.log(res.data)
         this.setState({ bookings: res.data });
       }
     });

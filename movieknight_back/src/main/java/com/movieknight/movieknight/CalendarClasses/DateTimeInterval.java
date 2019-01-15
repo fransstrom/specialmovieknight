@@ -14,7 +14,7 @@ public class DateTimeInterval {
     List<Interval> unavailableIntervals = new ArrayList<>();
 
     public DateTimeInterval() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             DateTime dateTimeStart1 = new DateTime().plusDays(i).withTime(18, 0, 0, 0);
             DateTime dateTimeEnd1 = new DateTime().plusDays(i).withTime(20, 0, 0, 0);
 
@@ -31,13 +31,11 @@ public class DateTimeInterval {
         List<Interval> validInterval = bookingIntervals;
         for (int i = 0; i < unavailableIntervals.size(); i++) {
             for (int j = 0; j < bookingIntervals.size(); j++) {
-              if(unavailableIntervals.get(i).overlaps(validInterval.get(j))){
-                  validInterval.remove(j);
-              }
+                if (unavailableIntervals.get(i).overlaps(validInterval.get(j))) {
+                    validInterval.remove(j);
+                }
             }
-
         }
-
         return validInterval;
     }
 

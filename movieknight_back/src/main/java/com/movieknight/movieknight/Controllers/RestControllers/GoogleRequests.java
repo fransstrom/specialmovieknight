@@ -62,7 +62,7 @@ public class GoogleRequests {
         Calendar calendar;
         List<Event> items;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        List<Interval> availablaBookings = null;
+        List<Interval> availablaBookings = new ArrayList<>();
 
         for (User user : userList) {
             Date now = new Date(System.currentTimeMillis());
@@ -100,15 +100,11 @@ public class GoogleRequests {
                         start = new DateTime(event.getStart().getDate().toString() + "T00:00:00.000+01:00");
                         end = new DateTime(event.getEnd().getDate().toString() + "T00:00:00.000+01:00");
 
-
                         dateTimeInterval.addToUnavailableIntervals(start.toString(), end.toString());
                     } else {
                         eventsToReturn.add(event);
-
-
                         dateTimeInterval.addToUnavailableIntervals(start.toString(), end.toString());
                     }
-
                 }
 
                 Long newExpiresAt = System.currentTimeMillis() / 1000 + 3600; // timestamp in seconds
@@ -117,7 +113,7 @@ public class GoogleRequests {
                 availablaBookings = dateTimeInterval.getValidInterVals();
             }
         }
-        if (availablaBookings.size() < 1 || availablaBookings == null) {
+        if (availablaBookings.size() < 1) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(availablaBookings, HttpStatus.OK);
@@ -205,7 +201,7 @@ public class GoogleRequests {
             bookings.add(booking);
         }
 
-        if (bookings.size() == 0) {
+        if (bookings.size() < 1) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(bookings, HttpStatus.OK);

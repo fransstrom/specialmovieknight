@@ -14,7 +14,7 @@ public class DateTimeInterval {
     List<Interval> unavailableIntervals = new ArrayList<>();
 
     public DateTimeInterval() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             DateTime dateTimeStart1 = new DateTime().plusDays(i).withTime(18, 0, 0, 0);
             DateTime dateTimeEnd1 = new DateTime().plusDays(i).withTime(20, 0, 0, 0);
 

@@ -47,12 +47,12 @@ public class GoogleRequests {
     private final String CLIENT_ID = "892035413711-k2fuimcicp4rkrp36auu2qt56kirnl12.apps.googleusercontent.com";
     private final String CLIENT_SECRET = "1VC8GEWAqWJ_WDR5cz71wt54";
 
-    DateTimeInterval dateTimeInterval = new DateTimeInterval();
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public ResponseEntity<List<Interval>> restGetEvents() throws ParseException {
         Iterable<User> userList = userRepository.findAll();
+        DateTimeInterval dateTimeInterval = new DateTimeInterval();
 
         String refreshToken;
         String accessToken;
@@ -115,15 +115,13 @@ public class GoogleRequests {
                 System.out.println(dateTimeInterval.getUnavailableIntervals());
                 System.out.println("DATETIMEINTERVALS VALID SIZE::!! " + dateTimeInterval.getValidInterVals().size());
                 availablaBookings = dateTimeInterval.getValidInterVals();
-
-
-            }
-
-            if (eventsToReturn.size() < 1) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
         }
-        return new ResponseEntity<>(availablaBookings, HttpStatus.OK);
+        if (availablaBookings.size() < 1 || availablaBookings == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(availablaBookings, HttpStatus.OK);
+        }
     }
 
 
@@ -199,19 +197,20 @@ public class GoogleRequests {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
-    public ResponseEntity<List<Booking>> restGetBookings() throws ParseException {
-    Iterable<Booking> bookingsRepo= bookingRepository.findAll();
-    List<Booking> bookings= new ArrayList<>();
+    public ResponseEntity<List<Booking>> restGetBookings() {
+        Iterable<Booking> bookingsRepo = bookingRepository.findAll();
+        List<Booking> bookings = new ArrayList<>();
 
-    bookingsRepo.forEach(e->{
-        bookings.add(e);
-    });
+        for (Booking booking : bookingsRepo) {
+            bookings.add(booking);
+        }
 
-    return new ResponseEntity<>(bookings,HttpStatus.OK);
+        if (bookings.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(bookings, HttpStatus.OK);
+        }
     }
-
-
-
 
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -219,7 +218,7 @@ public class GoogleRequests {
     @JsonProperty(value = "id")
     public void deleteBooking(@RequestParam String id) throws IOException, ParseException {
         System.out.println(id);
-        Booking book=bookingRepository.findById(id);
+        Booking book = bookingRepository.findById(id);
         System.out.println(book.getMovieTitle());
         bookingRepository.delete(book);
         Iterable<User> userList = userRepository.findAll();

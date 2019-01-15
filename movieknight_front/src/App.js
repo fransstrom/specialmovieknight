@@ -9,7 +9,7 @@ import ClientCenteredGrid from './components/client/clientGridComponent';
 import PrimarySearchAppBar from './components/admin/adminNavbarComponent';
 import ClientSearchAppBar from './components/client/clientNavbarComponent';
 
-import BookingsComponent from './components/client/bookingsComponent'
+import BookingsComponent from './components/client/bookingsComponent';
 
 //Kevin is genius
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
       movieInfo: {},
       moviesFromDatabase: [],
       availableBookingTimes: [],
-      bookings:[]
+      bookings: []
     };
     console.log('Constructor');
     this.getAllMoviesFromDatabase();
@@ -31,15 +31,18 @@ class App extends Component {
     //triggar refreshtoken i backend
     let url = 'http://localhost:6969/events';
     axios.get(url).then(res => {
-      this.setState({ availableBookingTimes: res.data });
+      if (res.data) {
+        this.setState({ availableBookingTimes: res.data });
+      }
     });
 
-      axios.get('http://localhost:6969/bookings').then(res => {
+    axios.get('http://localhost:6969/bookings').then(res => {
+      console.log(res)
+      if (res.data) {
         this.setState({ bookings: res.data });
-      });
-        
-    }
-  
+      }
+    });
+  }
 
   handleAdminState = () => {
     this.setState({ adminState: !this.state.adminState });
@@ -158,7 +161,8 @@ class App extends Component {
           </div>
           <div>
             <h2>Bookings</h2>
-            <BookingsComponent bookings={this.state.bookings}/></div>
+            <BookingsComponent bookings={this.state.bookings} />
+          </div>
         </div>
       );
     }

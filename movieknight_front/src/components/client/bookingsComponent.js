@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 export default class BookingsComponent extends Component {
-  delteBooking = e => {
+ 
+   async delteBooking (e){
     console.log(e);
-
-    axios.delete('http://localhost:6969/deletebooking', { params: { id: e.id } })
-      
+    await axios.delete('http://localhost:6969/deletebooking', {
+      params: { id: e.id }
+    }).then(this.props.updateBookingAndAvailableTimes());
   };
 
   render() {
@@ -20,7 +21,12 @@ export default class BookingsComponent extends Component {
           {e.movieTitle + ' '}
           {start + ' - '}
           {end}
-          <Button onClick={() => this.delteBooking(e)}>Ta bort</Button>
+          <Button
+            onClick={() => {
+              this.delteBooking(e);
+            }}>
+            Ta bort
+          </Button>
         </li>
       );
     });

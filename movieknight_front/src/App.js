@@ -25,43 +25,36 @@ class App extends Component {
     };
     console.log('Constructor');
     this.getAllMoviesFromDatabase();
+    this.updateBookingAndAvailableTimes = this.updateBookingAndAvailableTimes.bind(
+      this
+    );
   }
 
-  componentDidMount() {
-    //triggar refreshtoken i backend
-    let url = 'http://localhost:6969/events';
-    axios.get(url).then(res => {
+   async componentDidMount() {
+   await this.updateBookingAndAvailableTimes();
+  }
+ 
+
+  async updateBookingAndAvailableTimes() {
+    console.log('UPDATED LUL');
+    await axios.get('http://localhost:6969/events').then(res => {
       if (res.data) {
-        console.log(res.data)
         this.setState({ availableBookingTimes: res.data });
+      } else {
+        this.setState({ availableBookingTimes: [] });
       }
-    });
+    }).then();
 
-    axios.get('http://localhost:6969/bookings').then(res => {
-      console.log(res)
-      if (res.data) {
-        console.log(res.data)
-        this.setState({ bookings: res.data });
-      }
-    });
-  }
-
-  updateBookingAndAvailableTimes = () => {
-    console.log("UPDATED LUL")
-      axios.get('http://localhost:6969/events').then(res => {
-          if (res.data) {
-              console.log(res.data)
-              this.setState({ availableBookingTimes: res.data });
-          }
-      });
-
-      axios.get('http://localhost:6969/bookings').then(res => {
-          console.log(res)
-          if (res.data) {
-              console.log(res.data)
-              this.setState({ bookings: res.data });
-          }
-      });
+    await axios
+      .get('http://localhost:6969/bookings')
+      .then(res => {
+        if (res.data) {
+          this.setState({ bookings: res.data });
+        } else {
+          this.setState({ bookings: [] });
+        }
+      })
+      .then(() => console.log(this.state));
   }
 
   handleAdminState = () => {
@@ -127,7 +120,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.bookings);
     if (this.state.adminState) {
       return (
         <div className="App">
@@ -174,7 +166,9 @@ class App extends Component {
             <ClientCenteredGrid
               allMoviesFromDatabase={this.state.moviesFromDatabase}
               bookingsElem={this.state.availableBookingTimes}
-              updateBookingAndAvailableTimes={this.updateBookingAndAvailableTimes.bind(this)}
+              updateBookingAndAvailableTimes={
+                this.updateBookingAndAvailableTimes
+              }
               getAllMoviesFromDatabase={this.getAllMoviesFromDatabase.bind(
                 this
               )}
@@ -182,7 +176,12 @@ class App extends Component {
           </div>
           <div>
             <h2>Bookings</h2>
-            <BookingsComponent bookings={this.state.bookings} />
+            <BookingsComponent
+              updateBookingAndAvailableTimes={
+                this.updateBookingAndAvailableTimes
+              }
+              bookings={this.state.bookings}
+            />
           </div>
         </div>
       );

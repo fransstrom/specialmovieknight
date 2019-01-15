@@ -81,7 +81,7 @@ class ClientBookingModalClass extends React.Component {
     }
 
     render() {
-        const { classes, bookingsElem, item } = this.props;
+        const { classes, bookingsElem, item, updateBookingAndAvailableTimes } = this.props;
 
         var freebookings = bookingsElem;
         freebookings.sort((a, b) =>{
@@ -92,7 +92,7 @@ class ClientBookingModalClass extends React.Component {
             var sDate = new Date(e.startMillis).toString().slice(0, 25);
             var eDate = new Date(e.endMillis).toString().slice(15, 25);
             return (
-                <li key={sDate+eDate} className="bookingListItem" value={e} onClick={() => this.handleBooking(e.startMillis, e.endMillis, item.title, item.id)} >
+                <li key={sDate+eDate} className="bookingListItem" value={e} onClick={() => {this.handleBooking(e.startMillis, e.endMillis, item.title, item.id); updateBookingAndAvailableTimes();}} >
                     {sDate + ' - '}
                     {eDate}{' '}
                 </li>

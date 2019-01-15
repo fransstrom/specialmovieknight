@@ -46,6 +46,24 @@ class App extends Component {
     });
   }
 
+  updateBookingAndAvailableTimes = () => {
+    console.log("UPDATED LUL")
+      axios.get('http://localhost:6969/events').then(res => {
+          if (res.data) {
+              console.log(res.data)
+              this.setState({ availableBookingTimes: res.data });
+          }
+      });
+
+      axios.get('http://localhost:6969/bookings').then(res => {
+          console.log(res)
+          if (res.data) {
+              console.log(res.data)
+              this.setState({ bookings: res.data });
+          }
+      });
+  }
+
   handleAdminState = () => {
     this.setState({ adminState: !this.state.adminState });
     this.getAllMoviesFromDatabase();
@@ -156,6 +174,7 @@ class App extends Component {
             <ClientCenteredGrid
               allMoviesFromDatabase={this.state.moviesFromDatabase}
               bookingsElem={this.state.availableBookingTimes}
+              updateBookingAndAvailableTimes={this.updateBookingAndAvailableTimes.bind(this)}
               getAllMoviesFromDatabase={this.getAllMoviesFromDatabase.bind(
                 this
               )}

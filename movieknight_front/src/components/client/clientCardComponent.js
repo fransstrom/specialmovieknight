@@ -22,7 +22,7 @@ const styles = {
 };
 
 function ClientImgMediaCard(props) {
-    const { classes, item, bookingsElem } = props;
+    const { classes, item, bookingsElem, updateBookingAndAvailableTimes } = props;
     return (
         <Card className={classes.card}>
             <CardActionArea>
@@ -46,7 +46,7 @@ function ClientImgMediaCard(props) {
             </CardActionArea>
             <CardActions>
                 <ClientSimpleModalWrapped  item={item} />
-                <ClientBookingModal bookingsElem={bookingsElem} item={item}/>
+                <ClientBookingModal bookingsElem={bookingsElem} item={item} updateBookingAndAvailableTimes={updateBookingAndAvailableTimes}/>
             </CardActions>
         </Card>
     );

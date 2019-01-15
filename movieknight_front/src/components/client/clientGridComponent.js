@@ -19,7 +19,7 @@ const styles = theme => ({
 
 
 function ClientCenteredGrid(props) {
-    const { classes, allMoviesFromDatabase, bookingsElem } = props;
+    const { classes, allMoviesFromDatabase, bookingsElem, updateBookingAndAvailableTimes } = props;
     return (
 
         <div className={classes.root}>
@@ -28,7 +28,7 @@ function ClientCenteredGrid(props) {
                     return(
                         <Grid item xs={3} key={item.id+index}>
                             <Paper className={classes.paper}>
-                                <ClientImgMediaCard item={item} index={index} bookingsElem={bookingsElem}/>
+                                <ClientImgMediaCard item={item} index={index} bookingsElem={bookingsElem} updateBookingAndAvailableTimes={updateBookingAndAvailableTimes}/>
                             </Paper>
                         </Grid>
                     )

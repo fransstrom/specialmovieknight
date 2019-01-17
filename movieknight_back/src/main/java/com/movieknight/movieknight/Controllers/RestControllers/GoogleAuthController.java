@@ -1,39 +1,22 @@
 package com.movieknight.movieknight.Controllers.RestControllers;
 
 import com.google.api.client.googleapis.auth.oauth2.*;
-import com.google.api.client.http.HttpTransport;
+
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.DateTime;
-import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.EventDateTime;
-import com.google.api.services.calendar.model.Events;
-import com.movieknight.movieknight.Database.entities.UnavailableDateTime;
+
 import com.movieknight.movieknight.Database.entities.User;
-import com.movieknight.movieknight.Database.repositories.UnavalibleDateRepository;
 import com.movieknight.movieknight.Database.repositories.UserRepository;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileReader;
 import java.io.IOException;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @RestController
@@ -78,12 +61,7 @@ public class GoogleAuthController {
 
 
         String accessToken = tokenResponse.getAccessToken();
-        System.out.println("accessToken: " + accessToken);
         String refreshToken = tokenResponse.getRefreshToken();
-        Long expiresAt = System.currentTimeMillis() + (tokenResponse.getExpiresInSeconds() * 1000);
-        System.out.println("refreshToken: " + refreshToken);
-        System.out.println("expiresAt: " + expiresAt);
-
         GoogleIdToken idToken = tokenResponse.parseIdToken();
         GoogleIdToken.Payload payload = idToken.getPayload();
 

@@ -1,7 +1,6 @@
 package com.movieknight.movieknight.CalendarClasses;
 
 
-import com.movieknight.movieknight.Database.entities.UnavailableDateTime2;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
@@ -14,7 +13,7 @@ public class DateTimeInterval {
     List<Interval> unavailableIntervals = new ArrayList<>();
 
     public DateTimeInterval() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             DateTime dateTimeStart1 = new DateTime().plusDays(i).withTime(18, 0, 0, 0);
             DateTime dateTimeEnd1 = new DateTime().plusDays(i).withTime(20, 0, 0, 0);
 
@@ -29,9 +28,11 @@ public class DateTimeInterval {
 
     public List<Interval> getValidInterVals() {
         List<Interval> validInterval = bookingIntervals;
-        for (int i = 0; i < unavailableIntervals.size(); i++) {
-            for (int j = 0; j < bookingIntervals.size(); j++) {
-                if (unavailableIntervals.get(i).overlaps(validInterval.get(j))) {
+        List<Interval> unavailableInterval= unavailableIntervals;
+
+        for (Interval anUnavailableInterval : unavailableInterval) {
+            for (int j = 0; j < validInterval.size(); j++) {
+                if (anUnavailableInterval.overlaps(validInterval.get(j))) {
                     validInterval.remove(j);
                 }
             }

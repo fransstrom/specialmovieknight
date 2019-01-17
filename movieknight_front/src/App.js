@@ -10,7 +10,7 @@ import PrimarySearchAppBar from './components/admin/adminNavbarComponent';
 import ClientSearchAppBar from './components/client/clientNavbarComponent';
 
 import BookingsComponent from './components/client/bookingsComponent';
-
+import Button from '@material-ui/core/Button';
 //Kevin is genius
 class App extends Component {
   constructor(props) {
@@ -123,12 +123,7 @@ class App extends Component {
     if (this.state.adminState) {
       return (
         <div className="App">
-          <button
-            onClick={() => {
-              this.handleAdminState();
-            }}>
-            Click
-          </button>
+       
           <header className="App-header">
             MovieNight Admin Page
             {this.props.movieSearch}
@@ -144,17 +139,18 @@ class App extends Component {
               addToDataBase={this.addToDataBase.bind(this)}
             />
           </div>
+          <Button
+            onClick={() => {
+              this.handleAdminState();
+            }}>
+            Click
+          </Button>
         </div>
       );
     } else if (!this.state.adminState) {
       return (
         <div className="App">
-          <button
-            onClick={() => {
-              this.handleAdminState();
-            }}>
-            Click
-          </button>
+            
           <header className="App-header-client">
             MovieNight
             {this.props.movieSearch}
@@ -174,7 +170,7 @@ class App extends Component {
               )}
             />
           </div>
-          <div>
+          <div className="addedBookings">
             <h2>Bookings</h2>
             <BookingsComponent
               updateBookingAndAvailableTimes={
@@ -183,6 +179,12 @@ class App extends Component {
               bookings={this.state.bookings}
             />
           </div>
+          <Button
+            onClick={() => {
+              this.handleAdminState();
+            }}>
+            Click
+          </Button>
         </div>
       );
     }

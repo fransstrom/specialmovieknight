@@ -58,7 +58,7 @@ class ClientBookingModalClass extends React.Component {
     this.setState({ open: false });
   };
 
-   async handleBooking(eStart, eEnd, title, id) {
+   async handleBooking(eStart, eEnd, title, id, updateBookingAndAvailableTimes) {
     this.handleClose();
   await axios
       .post(`http://localhost:6969/booking`, {
@@ -69,11 +69,15 @@ class ClientBookingModalClass extends React.Component {
       })
       .then(function(response) {
         console.log(response);
+          updateBookingAndAvailableTimes();
       })
       .catch(function(error) {
         console.log(error);
       })
-      .then(this.props.updateBookingAndAvailableTimes());
+
+
+
+
 
 
     toast.success('🍿 Movie Added 🥤', {
@@ -87,7 +91,7 @@ class ClientBookingModalClass extends React.Component {
   }
 
   render() {
-    const { classes, bookingsElem, item } = this.props;
+    const { classes, bookingsElem, item, updateBookingAndAvailableTimes } = this.props;
 
     var freebookings = bookingsElem;
     freebookings.sort((a, b) => {
@@ -103,7 +107,7 @@ class ClientBookingModalClass extends React.Component {
           className="bookingListItem"
           value={e}
           onClick={() => {
-            this.handleBooking(e.startMillis, e.endMillis, item.title, item.id);
+            this.handleBooking(e.startMillis, e.endMillis, item.title, item.id, updateBookingAndAvailableTimes);
           }}>
           {sDate + ' - '}
           {eDate}{' '}

@@ -36,7 +36,7 @@ class App extends Component {
  
 
   async updateBookingAndAvailableTimes() {
-    console.log('UPDATED LUL');
+    console.log('UPDATED');
     await axios.get('http://localhost:6969/events').then(res => {
       if (res.data) {
         this.setState({ availableBookingTimes: res.data });

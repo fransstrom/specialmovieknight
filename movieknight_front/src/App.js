@@ -152,7 +152,7 @@ class App extends Component {
         <div className="App">
             
           <header className="App-header-client">
-            MovieNight
+            <h1 className="mainLabel">MovieNight</h1>
             {this.props.movieSearch}
           </header>
           <nav className="App-nav">

@@ -21,7 +21,7 @@ export default class BookingsComponent extends Component {
           {e.movieTitle + ' '}
           {start + ' - '}
           {end}
-          <Button
+          <Button className="deleteBooking"
             onClick={() => {
               this.delteBooking(e);
             }}>

@@ -1,4 +1,3 @@
-
 /*.App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -6,24 +5,34 @@
 
 .App-header {
   background-color: #5c6bc0;
-  height: 15vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  background-image: url('./components/css/Avatar-Movie-Poster.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .App-header-client {
   background-color: #ff2626;
-  height: 15vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  background-image: url('./components/css/Avatar-Movie-Poster.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .App-nav {
@@ -45,10 +54,8 @@
 }
 
 .App-body-background-client {
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/RJZZIy2/movie-theater-cloth-curtains-open_v1nh4alzz__F0003.png");
+  background-image: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/RJZZIy2/movie-theater-cloth-curtains-open_v1nh4alzz__F0003.png');
 }
-
-
 
 .App-footer {
   background-color: #5c6bc0;
@@ -68,23 +75,32 @@
   color: #61dafb;
 }
 
-.bookingListItem{
-cursor:pointer;  
-transition: 0.2s
+.bookingListItem {
+  cursor: pointer;
+  transition: 0.2s;
 }
-.bookingListItem:hover{
-  background-color:#0f9d58;
-  color:white;
-  transition: 0.2s
-  }
+.bookingListItem:hover {
+  background-color: #0f9d58;
+  color: white;
+  transition: 0.2s;
+}
 
+.addedBookings {
+  margin: 80px;
+}
 
-  .addedBookings{
-    margin:80px;
+.deleteBooking:focus {
+  display: none;
+}
 
-  }
+.mainLabel {
 
+ font-size:60px;
+  animation: 2s ease-in 0s 1 App-logo-spin;
+  /* animation: 2s ease-in 0s 1 headersize; */
+  /* animation: 2s ease-in down; */
 
+}
 
 @keyframes App-logo-spin {
   from {
@@ -93,4 +109,27 @@ transition: 0.2s
   to {
     transform: rotate(360deg);
   }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+  from {
+    font-size: 0;
+  }
+  to {
+    font-size: 60px;
+  }
+
+ 
+}
+
+@keyframes headersize {
+
+  
+}
+
+@keyframes down {
+ 
 }
